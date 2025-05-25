@@ -1,0 +1,55 @@
+ .clase-row {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #f2f2f2;
+        font-size: 1.1rem;
+    }
+    .clase-hora {
+        flex: 0 0 70px;
+        font-weight: 500;
+        color: #444;
+    }
+    .clase-info {
+        flex: 1 1 auto;
+        color: #6b7b6b;
+        padding-left: 1rem;
+        min-width: 0;
+        word-break: break-word;
+    }
+    .clase-reservar {
+        flex: 0 0 100px;
+        text-align: right;
+        padding-left: 2rem;
+    }
+    .clase-instructor {
+        color: #888;
+        font-size: 0.97em;
+    }
+    .clase-plazas {
+        font-size: 0.95em;
+        color: #5bc0be;
+        margin-left: 0.5em;
+    }
+
+    @media (max-width: 600px) {
+        .clase-row {
+            flex-direction: row;
+            align-items: flex-start;
+        }
+        .clase-hora {
+            flex: 0 0 55px;
+            font-size: 1em;
+            /* padding-top: 0.2em; */
+        }
+        .clase-info {
+            flex: 1 1 0;
+            padding-left: 0.7rem;
+        }
+        .clase-reservar {
+            flex: 0 0 auto;
+            padding-left: 0.5rem;
+            text-align: left;
+            /* margin-top: 0.2em; */
+        }
+    }

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Studio Yoga - Bienvenido</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.6/dist/minty/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/custom.css}">
+
+<body>
+	<!-- Incluye el navbar-fragment -->
+	<header>
+		<div th:replace="~{fragments/navbar :: navbar}"></div>
+	</header>
+
+	<div class="container text-center py-4 mt-5">
+		<h1 class="text-center my-4">Bienvenido a Studio Yoga</h1>
+		
+		<hr>
+		<h2 class="mt-5">Nuestras clases</h2>
+		<div class="row">
+			<div class="col-md-4" th:each="yogaClass : ${classes}">
+				<div class="card mb-3">
+					<div class="card-body">
+						<h5 class="card-title" th:text="${yogaClass.name}">Clase</h5>
+						<p class="card-text" th:text="${yogaClass.description}">Descripción</p>
+						<a th:href="@{/classes/{id}(id=${yogaClass.id})}" class="btn btn-success">Ver detalles</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<!-- Carrousel de imágenes -->
+		<section id="carrousel-eventos" class="my-5">
+			<h2>Eventos destacados</h2>
+			<div id="eventosCarousel" class="carousel slide" data-bs-ride="carousel">
+				<div class="carousel-inner">
+					<div th:each="event, iterStat : ${events}"
+						th:class="'carousel-item position-relative' + (${iterStat.index} == 0 ? ' active' : '')">
+
+						<img th:src="${event.imageUrl}" class="d-block w-100 fixed-height-img" alt="Imagen del evento">
+
+						<!-- Texto superpuesto -->
+						<div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+							<h5 th:text="${event.title}">Título del evento</h5>
+							<p>
+								<strong>Fecha:</strong>
+								<span
+									th:text="${#temporals.format(event.eventDate, 'dd/MM/yyyy')}">01/01/2025</span><br>
+								<strong>Lugar:</strong>
+								<span th:text="${event.location}">Lugar</span>
+							</p>
+							<p th:text="${event.description}">Descripción del evento</p>
+						</div>
+					</div>
+				</div>
+				<!-- Controles del carrousel -->
+				<button class="carousel-control-prev" type="button" data-bs-target="#eventosCarousel"
+					data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Anterior</span>
+				</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#eventosCarousel"
+					data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Siguiente</span>
+				</button>
+			</div>
+		</section>
+
+
+		<hr>
+		<!-- Información del estudio -->
+		<section id="info-estudio">
+			<h2>Sobre nuestro estudio</h2>
+			<p>Texto descriptivo...</p>
+		</section>
+		<hr>
+		<!-- Eventos -->
+		<!-- <section id="eventos">
+			<h2>Próximos eventos</h2>
+			 Listado de eventos 
+			<div th:if="${#lists.isEmpty(events)}">
+				<p>No hay eventos próximos.</p>
+			</div>
+			<div class="row" th:unless="${#lists.isEmpty(events)}">
+				<div class="col-md-4 mb-3" th:each="event : ${events}">
+					<div class="card h-100">
+						<div class="card-body">
+							<h5 class="card-title" th:text="${event.title}">Título</h5>
+							<p class="card-text">
+								<strong>Fecha:</strong>
+								<span
+									th:text="${#temporals.format(event.eventDate, 'dd/MM/yyyy')}">01/01/2025</span><br>
+								<strong>Lugar:</strong>
+								<span th:text="${event.location}">Lugar</span>
+							</p>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</section> -->
+				<!-- Reseñas y Portfolio -->
+		<section id="reseñas">
+			<h2>Reseñas</h2>
+			<!-- Carrousel de reseñas -->
+			<div id="carrousel-reseñas"></div>
+			<hr>
+			<h2>Portfolio</h2>
+			<!-- Galería de trabajos -->
+		</section>
+		<hr>
+	</div>
+	<!-- Incluye el footer-fragment -->
+	<div th:replace="~{fragments/footer :: footer}"></div>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>

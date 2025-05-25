@@ -1,0 +1,153 @@
+Listado de rutas de carpetas para el volumen OS
+El número de serie del volumen es C2C3-1807
+C:.
+¦   .gitattributes
+¦   .gitignore
+¦   estructura_proyecto.txt
+¦   HELP.md
+¦   mvnw
+¦   mvnw.cmd
+¦   pom.xml
+¦   
++---.mvn
+¦   +---wrapper
+¦           maven-wrapper.properties
+¦           
++---.vscode
+¦       settings.json
+¦       
++---src
+¦   +---main
+¦   ¦   +---java
+¦   ¦   ¦   +---studioyoga
+¦   ¦   ¦       +---config
+¦   ¦   ¦       ¦       SecurityConfig.java
+¦   ¦   ¦       ¦       
+¦   ¦   ¦       +---controller
+¦   ¦   ¦       ¦       AuthController.java
+¦   ¦   ¦       ¦       userController.java
+¦   ¦   ¦       ¦       UserRegistrationDto.java
+¦   ¦   ¦       ¦       
+¦   ¦   ¦       +---model
+¦   ¦   ¦       ¦   ¦   Instructor.java
+¦   ¦   ¦       ¦   ¦   Payment.java
+¦   ¦   ¦       ¦   ¦   Reservation.java
+¦   ¦   ¦       ¦   ¦   Role.java
+¦   ¦   ¦       ¦   ¦   User.java
+¦   ¦   ¦       ¦   ¦   YogaClass.java
+¦   ¦   ¦       ¦   ¦   
+¦   ¦   ¦       ¦   +---enums
+¦   ¦   ¦       ¦           ReservationStatus.java
+¦   ¦   ¦       ¦           
+¦   ¦   ¦       +---project
+¦   ¦   ¦       ¦       ProjectApplication.java
+¦   ¦   ¦       ¦       
+¦   ¦   ¦       +---repository
+¦   ¦   ¦       ¦       JavaMailSender.java
+¦   ¦   ¦       ¦       PasswordEncoder.java
+¦   ¦   ¦       ¦       ReservationRepository.java
+¦   ¦   ¦       ¦       RoleRepository.java
+¦   ¦   ¦       ¦       UserRepository.java
+¦   ¦   ¦       ¦       
+¦   ¦   ¦       +---service
+¦   ¦   ¦       ¦       ReservationService.java
+¦   ¦   ¦       ¦       UserService.java
+¦   ¦   ¦       ¦       
+¦   ¦   ¦       +---util
+¦   ¦   +---resources
+¦   ¦       ¦   application.properties
+¦   ¦       ¦   
+¦   ¦       +---static
+¦   ¦       ¦   +---css
+¦   ¦       ¦   +---images
+¦   ¦       ¦   +---js
+¦   ¦       +---templates
+¦   ¦           ¦   Index.html
+¦   ¦           ¦   
+¦   ¦           +---admin
+¦   ¦           +---instructor
+¦   ¦           +---user
+¦   +---test
+¦       +---java
+¦           +---studioyoga
+¦               +---project
+¦                       ProjectApplicationTests.java
+¦                       
++---target
+    ¦   project-0.0.1-SNAPSHOT.jar
+    ¦   project-0.0.1-SNAPSHOT.jar.original
+    ¦   
+    +---classes
+    ¦   ¦   application.properties
+    ¦   ¦   
+    ¦   +---studioyoga
+    ¦   ¦   +---config
+    ¦   ¦   ¦       SecurityConfig.class
+    ¦   ¦   ¦       
+    ¦   ¦   +---controller
+    ¦   ¦   ¦       AuthController.class
+    ¦   ¦   ¦       userController.class
+    ¦   ¦   ¦       UserRegistrationDto.class
+    ¦   ¦   ¦       
+    ¦   ¦   +---model
+    ¦   ¦   ¦   ¦   Instructor.class
+    ¦   ¦   ¦   ¦   Payment.class
+    ¦   ¦   ¦   ¦   Reservation$ReservationBuilder.class
+    ¦   ¦   ¦   ¦   Reservation.class
+    ¦   ¦   ¦   ¦   Role$RoleBuilder.class
+    ¦   ¦   ¦   ¦   Role.class
+    ¦   ¦   ¦   ¦   User$UserBuilder.class
+    ¦   ¦   ¦   ¦   User.class
+    ¦   ¦   ¦   ¦   YogaClass$YogaClassBuilder.class
+    ¦   ¦   ¦   ¦   YogaClass.class
+    ¦   ¦   ¦   ¦   
+    ¦   ¦   ¦   +---enums
+    ¦   ¦   ¦           ReservationStatus.class
+    ¦   ¦   ¦           
+    ¦   ¦   +---project
+    ¦   ¦   ¦       ProjectApplication.class
+    ¦   ¦   ¦       
+    ¦   ¦   +---repository
+    ¦   ¦   ¦       JavaMailSender.class
+    ¦   ¦   ¦       PasswordEncoder.class
+    ¦   ¦   ¦       ReservationRepository.class
+    ¦   ¦   ¦       RoleRepository.class
+    ¦   ¦   ¦       UserRepository.class
+    ¦   ¦   ¦       
+    ¦   ¦   +---service
+    ¦   ¦   ¦       ReservationService$ReservationConflictException.class
+    ¦   ¦   ¦       ReservationService.class
+    ¦   ¦   ¦       UserService.class
+    ¦   ¦   ¦       
+    ¦   ¦   +---util
+    ¦   +---templates
+    ¦           Index.html
+    ¦           
+    +---generated-sources
+    ¦   +---annotations
+    +---generated-test-sources
+    ¦   +---test-annotations
+    +---maven-archiver
+    ¦       pom.properties
+    ¦       
+    +---maven-status
+    ¦   +---maven-compiler-plugin
+    ¦       +---compile
+    ¦       ¦   +---default-compile
+    ¦       ¦           createdFiles.lst
+    ¦       ¦           inputFiles.lst
+    ¦       ¦           
+    ¦       +---testCompile
+    ¦           +---default-testCompile
+    ¦                   createdFiles.lst
+    ¦                   inputFiles.lst
+    ¦                   
+    +---surefire-reports
+    ¦       studioyoga.project.ProjectApplicationTests.txt
+    ¦       TEST-studioyoga.project.ProjectApplicationTests.xml
+    ¦       
+    +---test-classes
+        +---studioyoga
+            +---project
+                    ProjectApplicationTests.class
+                    

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FORMULARIO CREACION Y EDICION USUARIOS</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.6/dist/minty/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/custom.css}">
+</head>
+<body>
+	<!-- Incluye el navbar-fragment -->
+	<header>
+		<div th:replace="~{fragments/navbarAdmin :: navbar}"></div>
+	</header>
+	<h3 class="text-center my-5">Formulario de creación y edición de
+		Reservas</h3>
+        <div th:replace="~{fragments/messages :: messages}"></div>
+
+<div class="container my-5">
+    <h1>Nueva Reserva</h1>
+    <form th:action="@{/admin/reservations/save}" th:object="${reservation}" method="post">
+        <div class="mb-3">
+            <label class="form-label">Usuario</label>
+            <select th:field="*{user}" class="form-control" required>
+                <option th:each="u : ${users}" th:value="${u.id}" th:text="${u.name}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Clase</label>
+            <select th:field="*{classes}" class="form-control" required>
+                <option th:each="c : ${classes}" th:value="${c.id}" th:text="${c.title}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a th:href="@{/admin/reservations/managereservations}" class="btn btn-secondary">Volver</a>
+    </form>
+    
+</div>
+<!-- Incluye el footer-fragment -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+    crossorigin="anonymous"></script>
+</body>
+</html>

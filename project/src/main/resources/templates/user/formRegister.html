@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulario de registro</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.6/dist/minty/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/custom.css}">
+</head>
+<body>
+	<!-- Incluye el navbar-fragment -->
+	<header>
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+        </header>
+        
+
+ <!-- Contenedor de alertas dinámicas -->
+    <!-- Mensaje de éxito -->
+	<!-- <div th:if="${mensajeExito}" id="successAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+    	<p th:text="${mensajeExito}"></p>
+    	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+     Mensaje de error -->
+    <!-- <div th:if="${mensajeError}" id="warnignAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
+    	<p th:text="${mensajeError}"></p>
+        <button type="button"  class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>  -->
+
+    <!-- Contenedor principal del formulario -->
+    <div class="container form-container align-items-center justify-content-center py-4 mt-5">
+        <h3 class="text-center mb-5">Alta de Usuario</h3>
+        <form th:action="@{/admin/altaUser}" method="post" onsubmit="return validateForm(event)">
+            <!-- Campo para el nombre -->
+            <div class="row mb-1">
+                <div class="col">
+                    <label for="nombre" class="form-label"></label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" maxlength="50" minlength="2"
+                        placeholder="Nombre" required>
+                </div>
+            </div>
+
+            <!-- Campos para los apellidos -->
+            <div class="row mb-1">
+                <div class="col">
+                    <label for="primerApellido" class="form-label"></label>
+                    <input type="text" class="form-control" id="primerApellido"
+                        name="primerApellido" maxlength="50" minlength="2" placeholder="Apellido 1" required>
+                </div>
+                <div class="col">
+                    <label for="segundoApellido" class="form-label"></label>
+                    <input type="text" class="form-control" id="segundoApellido"
+                        name="segundoApellido" maxlength="50" minlength="2" placeholder="Apellido 2">
+                </div>
+            </div>
+
+            <!-- Campo para el correo -->
+            <div class="row">
+                <div class="col">
+                    <label for="email" class="form-label"></label>
+                    <input type="email" class="form-control" id="email" name="correo" 
+                        placeholder="Correo"
+                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                        required>
+                </div>
+            </div>
+
+            <!-- Campo para la contraseña y selección de rol -->
+            <div class="row mb-1">
+                <div class="col">
+                    <label for="password" class="form-label"></label>
+                    <input type="password" class="form-control" id="password"
+                        name="contrasena_user" placeholder="Contraseña" required>
+                </div>
+                <div class="col">
+                    <label for="role" class="form-label"></label>
+                    <select id="role" name="role" class="form-select" required>
+                        <option value="" selected disabled>Rol</option>
+                        <option value="admin">Administrador</option>
+                        <option value="user">Usuario</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Checkbox para mostrar contraseña -->
+            <div class="mb-1 form-check">
+                <label class="form-check-label" for="showPassword">
+                    <input type="checkbox" class="form-check-input" id="showPassword">
+                    <span class="custom-checkbox"></span> Mostrar Contraseña
+                </label>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-sm">Guardar</button>
+                <button type="reset" class="btn btn-warning btn-sm">Limpiar</button>
+                <a th:href="@{/}" class="btn btn-secondary btn-sm">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+<!-- Incluye el footer-fragment -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+	
+    <!-- Validación de la contraseña -->
+    <script>
+        function validatePassword() {
+            const password = document.getElementById("password").value;
+            const alertContainer = document.getElementById("alertContainer");
+            alertContainer.innerHTML = ""; // Limpiar alertas previas
+
+            // Regex actualizado para incluir "." como carácter especial
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=.]).{12,16}$/;
+            if (!passwordRegex.test(password)) {
+                alertContainer.innerHTML = `
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        La contraseña debe tener entre 12 y 16 caracteres e incluir mayúsculas, minúsculas, números y caracteres especiales (como . @ # $ % ^ & + =).
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                `;
+                return false;
+            }
+            return true;
+        }
+    </script>
+      <!-- cierra la alerta en el boton close -->
+    
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const closeButtons = document.querySelectorAll('.btn-close[data-bs-dismiss="alert"]');
+        closeButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const alert = button.closest('.alert');
+                if (alert) {
+                    alert.classList.remove('show');
+                    alert.addEventListener('transitionend', () => alert.remove(), { once: true });
+                }
+            });
+        });
+    });
+</script>
+
+
+
+    <!-- Validación del formulario -->
+    <script>
+        function validateForm(event) {
+            const alertContainer = document.getElementById("alertContainer");
+            alertContainer.innerHTML = ""; // Limpiar alertas previas
+
+            // Validación de la contraseña
+            const password = document.getElementById("password").value;
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=.]).{12,16}$/;
+            if (!passwordRegex.test(password)) {
+                alertContainer.innerHTML += `
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        La contraseña debe tener entre 12 y 16 caracteres e incluir mayúsculas, minúsculas, números y caracteres especiales.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                `;
+                event.preventDefault(); // Evitar el envío
+                return false;
+            }
+
+            // Validación del correo
+            const email = document.getElementById("email").value;
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailRegex.test(email)) {
+                alertContainer.innerHTML += `
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        Introduce un correo válido (ejemplo@dominio.com).
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                `;
+                event.preventDefault(); // Evitar el envío
+                return false;
+            }
+            // Validación del nombre// Permitir el envío si es válido
+            return true; 
+        }
+    </script>
+
+    <!-- Mostrar/Ocultar contraseña -->
+    <script>
+        const passwordInput = document.getElementById('password');
+        const showPasswordCheckbox = document.getElementById('showPassword');
+
+        showPasswordCheckbox.addEventListener('change', function () {
+            passwordInput.type = this.checked ? 'text' : 'password';
+        });
+    </script>
+
+    <!-- Script de Bootstrap para funcionalidad adicional -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+
+</body>
+</html>

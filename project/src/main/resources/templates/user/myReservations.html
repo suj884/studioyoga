@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Reservas</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.6/dist/minty/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/custom.css}">
+</head>
+
+<body>
+    <!-- Incluye el navbar-fragment -->
+    <header>
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+    </header>
+    <div class="container py-4 mt-5">
+        <h1>Mis reservas</h1>
+        <div th:replace="~{fragments/messages :: messages}"></div>
+       <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Clase</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Instructor</th>
+            <th>Ubicación</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="reservation : ${reservations}">
+            <td th:text="${reservation.classes.title}"></td>
+            <td th:text="${#temporals.format(reservation.classes.eventDate, 'dd/MM/yyyy')}"></td>
+            <td>
+                <span th:text="${reservation.classes.timeInit}"></span> -
+                <span th:text="${reservation.classes.timeEnd}"></span>
+            </td>
+            <td th:text="${reservation.classes.instructor}"></td>
+            <td th:text="${reservation.classes.location}"></td>
+            <td>
+                <form th:action="@{/classes/cancelReservation/{id}(id=${reservation.id})}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm"
+                        onclick="return confirm('¿Seguro que quieres cancelar esta reserva?');">
+                        Cancelar
+                    </button>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div th:if="${#lists.isEmpty(reservations)}" class="alert alert-info">
+    No tienes reservas activas.
+</div>
+        <a th:href="@{/classes}" class="btn btn-secondary mt-3">Volver</a>
+    </div>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>

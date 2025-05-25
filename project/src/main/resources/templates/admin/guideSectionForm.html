@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulario de guia del yoga</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.6/dist/minty/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/custom.css}">
+
+</head>
+<!-- Incluye el navbar-fragment -->
+<header>
+	<div th:replace="~{fragments/navbarAdmin :: navbar}"></div>
+</header>
+<body>
+<div class="container py-4 mt-5">
+    <h2 class="mb-4">Secciones de la guia del yoga</h2>
+<form th:action="@{${guideSection.id != null} ? '/admin/guide/edit/' + ${guideSection.id} : '/admin/guide/new'}"
+      th:object="${guideSection}" method="post"> 
+        <div class="mb-3">
+            <label for="title" class="form-label">Titulo</label>
+            <input th:field="*{title}" type="text" class="form-control" id="title" required>
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">Contenido</label>
+            <textarea th:field="*{content}" class="form-control" id="content" rows="8"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="imageUrl" class="form-label">Imagen</label>
+            <input th:field="*{imageUrl}" type="text" class="form-control" id="imageUrl">
+        </div>
+        <div class="mb-3">
+            <label for="sectionOrder" class="form-label">Orden</label>
+            <input th:field="*{sectionOrder}" type="number" class="form-control" id="sectionOrder">
+        </div>
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a th:href="@{/admin/guide/manageguide}" class="btn btn-secondary ms-2">Cancelar</a>
+    </form>
+
+</div>
+<!-- Incluye el footer-fragment -->
+	<div th:replace="~{fragments/footer :: footer}"></div>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+		crossorigin="anonymous"></script>
+</body>
+</html>

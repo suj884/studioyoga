@@ -1,0 +1,26 @@
+  /* Estilos para las tarjetas en móvil */
+      @media (max-width: 767.98px) {
+        .schedule-card {
+          border: 1px solid #e3e3e3;
+          border-radius: 8px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+          margin-bottom: 1.2em;
+          padding: 1em;
+          background: #fff;
+        }
+        .schedule-card .hour {
+          font-weight: bold;
+          color: #5bc0be;
+          margin-bottom: 0.5em;
+        }
+        .schedule-card .day-label {
+          font-weight: 600;
+          color: #3a3a3a;
+        }
+        .schedule-card .class-info {
+          margin-bottom: 0.7em;
+        }
+        .schedule-card .class-info:last-child {
+          margin-bottom: 0;
+        }
+      }

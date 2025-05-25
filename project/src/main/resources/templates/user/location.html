@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ubicación</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.6/dist/minty/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/custom.css}">
+</head>
+<body>
+	<!-- Incluye el navbar-fragment -->
+	<header>
+		<div th:replace="~{fragments/navbar :: navbar}"></div>
+	</header>
+
+	<style>
+.location-section {
+	background: #f8f9fa; /* Fondo muy claro, propio de Minty */
+	border-radius: 16px;
+	padding: 2.5rem 1.5rem;
+	margin-top: 2rem;
+	box-shadow: 0 2px 12px rgba(26, 188, 156, 0.08); /* Sombra con el verde Minty */
+	border: 1px solid #a2dedc; /* Borde suave Minty */
+}
+
+.location-title {
+	color: #1abc9c; /* Verde Minty */
+	font-weight: bold;
+	letter-spacing: 1px;
+}
+
+.address-highlight {
+	font-size: 1.1em;
+	color: #16a085; /* Verde más oscuro de Minty */
+	font-weight: 500;
+	margin-bottom: 1rem;
+}
+
+.map-responsive {
+	overflow: hidden;
+	padding-bottom: 56.25%;
+	position: relative;
+	height: 0;
+	border-radius: 14px;
+	box-shadow: 0 2px 8px rgba(26, 188, 156, 0.07);
+	border: 1px solid #a2dedc;
+}
+
+.map-responsive iframe {
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	border: 0;
+}
+
+h5.text-success {
+	color: #1abc9c !important; /* Usar el verde Minty para los títulos */
+}
+
+ul {
+	padding-left: 1.2rem;
+}
+
+li {
+	margin-bottom: 0.5rem;
+}
+
+.text-muted {
+	color: #7b8a8b !important;
+}
+</style>
+	</head>
+<body>
+	<div class="container py-4 mt-5">
+    <div class="location-section">
+      <h1 class="location-title text-center mb-4">Ubicación del Estudio</h1>
+      <p class="text-center mb-3" style="font-size:1.15em;">
+        Nuestro estudio de <strong>yoga en Utrera</strong> es un espacio amplio, luminoso y acogedor, pensado para que disfrutes al máximo de tu práctica. Estamos situados en una zona tranquila y de fácil acceso, ideal para relajarse y desconectar del ritmo diario.
+      </p>
+      <div class="address-highlight text-center">
+        <i class="bi bi-geo-alt-fill"></i>
+        P.º de Consolación, 1, 41710 Utrera, Sevilla
+      </div>
+      <div class="map-responsive mb-4">
+        <iframe
+					src="https://www.google.com/maps?q=P.º+de+Consolación,+1,+41710+Utrera,+Sevilla&output=embed"
+					allowfullscreen="" loading="lazy"
+					referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <h5 class="text-success">
+						<i class="bi bi-bus-front"></i> Transporte público</h5>
+          <ul>
+            <li>Líneas de autobús urbano e interurbano con parada cercana.</li>
+            <li>Estación de tren de Utrera a 10 minutos andando.</li>
+            <li>Fácil acceso desde el centro de Utrera y localidades cercanas.</li>
+          </ul>
+        </div>
+        <div class="col-md-6 mb-3">
+          <h5 class="text-success">
+						<i class="bi bi-car-front"></i> Aparcamiento</h5>
+          <ul>
+            <li>Zona de fácil estacionamiento en la misma calle.</li>
+            <li>Aparcamiento público gratuito a pocos metros del estudio.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="text-center text-muted mt-4">
+        Si tienes cualquier duda sobre cómo llegar, ¡contáctanos y te ayudamos!
+      </p>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Incluye el footer-fragment -->
+	<div th:replace="~{fragments/footer :: footer}"></div>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+		crossorigin="anonymous"></script>
+</body>
+
+
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Blog</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.6/dist/minty/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/custom.css}">
+       <style>
+   
+    .blog-title-main {
+      color: #388e3c;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-bottom: 2.5rem;
+    }
+    .blog-card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 14px rgba(60, 90, 60, 0.09);
+      margin-bottom: 2.5rem;
+      transition: box-shadow 0.2s;
+      border: none;
+      overflow: hidden;
+    }
+    .blog-card:hover {
+      box-shadow: 0 8px 24px rgba(60, 90, 60, 0.15);
+      transform: translateY(-2px) scale(1.01);
+    }
+    .blog-card-img-top {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      border-top-left-radius: 14px;
+      border-top-right-radius: 14px;
+    }
+    .blog-card-body {
+      padding: 1.5rem 1.5rem 1rem 1.5rem;
+    }
+    .blog-card-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #2e7d32;
+      margin-bottom: 0.7rem;
+      transition: color 0.2s;
+    }
+    .blog-card-title:hover {
+      color: #007bff;
+      text-decoration: underline;
+    }
+    .blog-card-summary {
+      color: #555;
+      font-size: 1.05rem;
+      margin-bottom: 1.2rem;
+      min-height: 60px;
+    }
+    .blog-card-date {
+      font-size: 0.95em;
+      color: #888;
+      margin-bottom: 0.7rem;
+      display: block;
+    }
+    @media (max-width: 767px) {
+      .blog-card-img-top {
+        height: 160px;
+      }
+      .blog-card-body {
+        padding: 1rem 1rem 0.8rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar fragment -->
+  <header>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+  </header>
+  
+  <main class="container py-4 mt-5">
+    <h1 class="text-center blog-title-main">Blog</h1>
+    <div class="row justify-content-center">
+      <!-- Blog posts grid -->
+      <div class="col-lg-10">
+        <div class="row g-4">
+          <div th:each="post : ${blogPosts}" class="col-md-6">
+            <div class="card blog-card h-100">
+              <a th:href="@{/blog/{id}(id=${post.id})}" style="text-decoration:none;">
+                <img th:if="${post.imageUrl != null}" th:src="@{${post.imageUrl}}" class="blog-card-img-top" alt="Imagen del post" />
+              </a>
+              <div class="card-body blog-card-body">
+                <span th:if="${post.publishedDate != null}" class="blog-card-date">
+                  <i class="bi bi-calendar-event"></i>
+                  <span th:text="${#temporals.format(post.publishedDate, 'dd/MM/yyyy')}"></span>
+
+                </span>
+                <a th:href="@{/blog/{id}(id=${post.id})}" style="text-decoration:none;">
+                  <h2 class="blog-card-title" th:text="${post.title}">Título del post</h2>
+                </a>
+                <p class="blog-card-summary" th:text="${post.summary}">Resumen o extracto del post...</p>
+                <a th:href="@{/blog/{id}(id=${post.id})}" class="btn btn-outline-success btn-sm">Leer más</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Si no hay posts -->
+        <div th:if="${#lists.isEmpty(blogPosts)}" class="text-center text-muted mt-5">
+          <p>No hay entradas de blog disponibles por el momento.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+	<!-- Incluye el footer-fragment -->
+	<div th:replace="~{fragments/footer :: footer}"></div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>
