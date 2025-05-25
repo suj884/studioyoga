@@ -7,7 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
+import studioyoga.project.repository.BlogPostRepository;
+import studioyoga.project.repository.ClassRepository;
 import studioyoga.project.repository.EventRepository;
+import studioyoga.project.repository.GuideSectionRepository;
+import studioyoga.project.repository.ReservationRepository;
 import studioyoga.project.repository.UserRepository;
 
 
@@ -22,15 +26,29 @@ public class AdminController {
 
 	@Autowired
 	private EventRepository eventRepository;
+	@Autowired
+	private BlogPostRepository blogPostRepository;
+	@Autowired
+	private ClassRepository classRepository;
+	@Autowired
+	private ReservationRepository reservationRepository;
+	@Autowired
+	private GuideSectionRepository guideSectionRepository;
 
 	@GetMapping("/dashboard")
 	public String showAdminPanel(Model model) {
-		long totalUsuarios = userRepository.count();
-		long totalEventos = eventRepository.count();
-		model.addAttribute("totalUsuarios", totalUsuarios);
-		model.addAttribute("totalEventos", totalEventos);
-		// model.addAttribute("totalClases", totalClases);
-        // model.addAttribute("reservasPendientes", reservasPendientes);
+		long totalClass = classRepository.count();
+		long totalEvents = eventRepository.count();
+		long totalUsers = userRepository.count();
+		long totalReservations = reservationRepository.count();
+		long totalGuideSections = guideSectionRepository.count();
+		long totalBlog = blogPostRepository.count();
+		model.addAttribute("totalUsers", totalUsers);
+		model.addAttribute("totalEvents", totalEvents);
+		model.addAttribute("totalClass", totalClass);
+        model.addAttribute("totalReservations", totalReservations);
+		model.addAttribute("totalGuideSections", totalGuideSections);
+		model.addAttribute("totalBlog", totalBlog);
 		return "admin/dashboard"; 
 	}
 

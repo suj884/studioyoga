@@ -11,12 +11,16 @@ import studioyoga.project.repository.BlogPostRepository;
 
 @Service
 public class BlogService {
-     @Autowired
+    @Autowired
     private BlogPostRepository blogPostRepository;
 
     // Obtener todos los posts
     public List<BlogPost> findAll() {
         return blogPostRepository.findAll();
+    }
+
+    public List<BlogPost> findAllPublishedOrdered() {
+        return blogPostRepository.findAllByOrderByPublishedDateDesc();
     }
 
     // Obtener post por id
