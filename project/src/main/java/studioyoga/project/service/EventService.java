@@ -17,7 +17,10 @@ public class EventService {
 //    public List<Event> getUpcomingEvents(LocalDate now) {
 //        return eventRepository.findByEventDateGreaterThanEqualOrderByEventDateAsc(now);
 //    }
-    public List<Event> findAllActive() { return eventRepository.findByActiveTrue(); }
+   public List<Event> findAllActive() {
+    return eventRepository.findByActiveTrueOrderByEventDateAsc();
+}
+
     public List<Event> findAll() { return eventRepository.findAll(); }
     public Event findById(Integer id) { return eventRepository.findById(id).orElse(null); }
     public Event save(Event event) { return eventRepository.save(event); }
@@ -29,5 +32,6 @@ public class EventService {
             save(event);
         }
     }
+
 }
 

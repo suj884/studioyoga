@@ -34,7 +34,7 @@ public class EventsController {
 	    @PostMapping("/save")
 	    public String saveEvent(@ModelAttribute Event event) {
 	        eventService.save(event);
-	        return "redirect:/admin/manageevents";
+	        return "redirect:/admin/events/manageevents";
 	    }
 
 	    // Mostrar formulario de edición

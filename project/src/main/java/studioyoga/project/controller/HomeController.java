@@ -63,12 +63,13 @@ public class HomeController {
 		return "user/rules";
 	}
 
-	@GetMapping("/events")
-	public String events(Model model) {
-		List<Event> events = eventService.findAll();
-		model.addAttribute("events", events);
-		return "user/events";
-	}
+@GetMapping("/events")
+public String events(Model model) {
+    List<Event> events = eventService.findAllActive(); // <-- Solo eventos activos
+    model.addAttribute("events", events);
+    return "user/events";
+}
+
        // Listado de posts para usuarios
     @GetMapping("/blog")
     public String showBlog(Model model) {

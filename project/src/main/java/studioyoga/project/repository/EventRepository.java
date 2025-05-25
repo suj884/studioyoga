@@ -9,6 +9,9 @@ import studioyoga.project.model.Event;
 public interface EventRepository extends JpaRepository<Event, Integer> {
 
 	List<Event> findByEventDateGreaterThanEqualOrderByEventDateAsc(LocalDate now);
+
 	List<Event> findByActiveTrue();
+
+	List<Event> findByActiveTrueOrderByEventDateAsc();
 
 }
