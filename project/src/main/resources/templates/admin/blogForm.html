@@ -1,55 +1,53 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Formulario del blog</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.6/dist/minty/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" th:href="@{/css/custom.css}">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario del blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.6/dist/minty/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
 </head>
-<!-- Incluye el navbar-fragment -->
-<header>
-	<div th:replace="~{fragments/navbarAdmin :: navbar}"></div>
-</header>
-<body>
-   <div class="container py-4 mt-5">
-    <h2 class="mb-4" th:text="${post.id} == null ? 'Crear Nueva Entrada' : 'Editar Entrada'"></h2>
-    <form th:action="@{/admin/blog/save}" th:object="${post}" method="post">
-        <input type="hidden" th:field="*{id}" />
-
-        <div class="mb-3">
-            <label for="title" class="form-label">Título</label>
-            <input th:field="*{title}" type="text" class="form-control" id="title" required>
+<body class="d-flex flex-column min-vh-100">
+    <!-- Incluye el navbar-fragment -->
+    <header>
+        <div th:replace="~{fragments/navbarAdmin :: navbar}"></div>
+    </header>
+    <main class="flex-fill">
+        <div class="container py-4 mt-5 min-vh-100">
+            <h2 class="mb-4" th:text="${post.id} == null ? 'Crear Nueva Entrada' : 'Editar Entrada'"></h2>
+            <form th:action="@{/admin/blog/save}" th:object="${post}" method="post">
+                <input type="hidden" th:field="*{id}" />
+                <div class="mb-3">
+                    <label for="title" class="form-label">Título</label>
+                    <input th:field="*{title}" type="text" class="form-control" id="title" required>
+                </div>
+                <div class="mb-3">
+                    <label for="summary" class="form-label">Resumen</label>
+                    <textarea th:field="*{summary}" class="form-control" id="summary" rows="3" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="content" class="form-label">Contenido</label>
+                    <textarea th:field="*{content}" class="form-control" id="content" rows="8" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="imageUrl" class="form-label">URL de la imagen</label>
+                    <input th:field="*{imageUrl}" type="text" class="form-control" id="imageUrl">
+                </div>
+                <div class="mb-3">
+                    <label for="publishedDate" class="form-label">Fecha de publicación</label>
+                    <input th:field="*{publishedDate}" type="date" class="form-control" id="publishedDate" required>
+                </div>
+                <button type="submit" class="btn btn-success">Guardar</button>
+                <a th:href="@{/admin/blog/manageblog}" class="btn btn-secondary ms-2">Cancelar</a>
+            </form>
         </div>
-        <div class="mb-3">
-            <label for="summary" class="form-label">Resumen</label>
-            <textarea th:field="*{summary}" class="form-control" id="summary" rows="3" required></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="content" class="form-label">Contenido</label>
-            <textarea th:field="*{content}" class="form-control" id="content" rows="8" required></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="imageUrl" class="form-label">URL de la imagen</label>
-            <input th:field="*{imageUrl}" type="text" class="form-control" id="imageUrl">
-        </div>
-        <div class="mb-3">
-            <label for="publishedDate" class="form-label">Fecha de publicación</label>
-            <input th:field="*{publishedDate}" type="date" class="form-control" id="publishedDate" required>
-        </div>
-        <button type="submit" class="btn btn-success">Guardar</button>
-        <a th:href="@{/admin/blog/manageblog}" class="btn btn-secondary ms-2">Cancelar</a>
-    </form>
-</div>
-
-<!-- Incluye el footer-fragment -->
-	<div th:replace="~{fragments/footer :: footer}"></div>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
-		crossorigin="anonymous"></script>
+    </main>
+    <!-- Incluye el footer-fragment -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+        crossorigin="anonymous"></script>
 </body>
 </html>
