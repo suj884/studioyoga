@@ -8,18 +8,20 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" th:href="@{/css/custom.css}">
+  <link rel="stylesheet" th:href="@{/css/blog.css}">
+
 </head>
 <body class="d-flex flex-column min-vh-100">
   <!-- Navbar fragment -->
   <header th:replace="~{fragments/navbar :: navbar}"></header>
   <main class="flex-fill">
-    <div class="container py-5 mt-5">
+    <div class="container py-5 mt-5 d-flex flex-column min-vh-100">
       <h1 class="text-center blog-title-main">Blog</h1>
-      <div class="row justify-content-center">
+      <div class="row  justify-content-center">
         <!-- Blog posts grid -->
         <div class="col-lg-10">
           <div class="row g-4">
-            <div th:each="post : ${blogPosts}" class="col-md-6">
+            <div th:each="post : ${blogPosts}" class="col-md-6 col-lg-6 mx-auto">
               <div class="card blog-card h-100">
                 <a th:href="@{/blog/{id}(id=${post.id})}" style="text-decoration:none;">
                   <img th:if="${post.imageUrl != null}" th:src="@{${post.imageUrl}}" class="blog-card-img-top"

@@ -100,6 +100,14 @@ List<BlogPost> blogPosts = blogService.findAllPublishedOrdered();
 	@GetMapping("/location")
 	public String location() {
 		return "user/location";
+	}	
+	@GetMapping("/aboutUS")
+	public String aboutUs() {
+		return "user/aboutUs";
+	}	
+	@GetMapping("/formContact")
+	public String contact() {
+		return "user/formContact";
 	}
 
 }

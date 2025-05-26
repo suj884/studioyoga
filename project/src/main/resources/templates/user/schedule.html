@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horario</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.6/dist/minty/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link rel="stylesheet" th:href="@{/css/custom.css}">
-		<link rel="stylesheet" th:href="@{/css/schedule.css}">
-</head>
-<body>
-<!-- Incluye el navbar-fragment -->
-	<header>
-		<div th:replace="~{fragments/navbar :: navbar}"></div>
-	</header>
-  <div class="container py-4 mt-5">
-      <h1 class="text-center mb-4">Horario semanal de clases</h1>
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Horario</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.6/dist/minty/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/custom.css}">
+  <link rel="stylesheet" th:href="@{/css/schedule.css}">
+</head>
+
+<body>
+  <!-- Incluye el navbar-fragment -->
+  <header th:replace="~{fragments/navbar :: navbar}"></header>
+  <main class="flex-fill">
+    <div class="container py-4 mt-5">
+      <h1 class="text-center mb-4">Horario semanal de clases</h1>
       <!-- Tabla tradicional para escritorio/tablet -->
       <div class="table-responsive d-none d-md-block">
         <table class="table table-bordered align-middle text-center">
@@ -38,7 +38,8 @@
               <td class="hour-col">9:00</td>
               <td></td>
               <td>
-                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0" title="Hatha Yoga" data-bs-content="Clase suave para todos los niveles, centrada en la respiración, la relajación y la alineación postural.">
+                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0" title="Hatha Yoga"
+                  data-bs-content="Clase suave para todos los niveles, centrada en la respiración, la relajación y la alineación postural.">
                   <strong>Hatha Yoga</strong><br>
                   Sara<br>
                   60 min.
@@ -46,7 +47,8 @@
               </td>
               <td></td>
               <td>
-                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0" title="Hatha Yoga" data-bs-content="Clase suave para todos los niveles, centrada en la respiración, la relajación y la alineación postural.">
+                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0" title="Hatha Yoga"
+                  data-bs-content="Clase suave para todos los niveles, centrada en la respiración, la relajación y la alineación postural.">
                   <strong>Hatha Yoga</strong><br>
                   Sara<br>
                   60 min.
@@ -59,7 +61,8 @@
             <tr>
               <td class="hour-col">10:00</td>
               <td>
-                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0" title="Yoga Suave" data-bs-content="Clase de yoga para todos los niveles, centrada en la respiración y la relajación.">
+                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0" title="Yoga Suave"
+                  data-bs-content="Clase de yoga para todos los niveles, centrada en la respiración y la relajación.">
                   <strong>Yoga Suave</strong><br>
                   Sara<br>
                   60 min.
@@ -67,7 +70,8 @@
               </td>
               <td></td>
               <td>
-                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0" title="Yoga Suave" data-bs-content="Clase de yoga para todos los niveles, centrada en la respiración y la relajación.">
+                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0" title="Yoga Suave"
+                  data-bs-content="Clase de yoga para todos los niveles, centrada en la respiración y la relajación.">
                   <strong>Yoga Suave</strong><br>
                   Sara<br>
                   60 min.
@@ -75,7 +79,9 @@
               </td>
               <td></td>
               <td>
-                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0" title="Hatha y Meditación" data-bs-content="Combinación de posturas de Hatha Yoga y técnicas de meditación guiada para un bienestar integral.">
+                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0"
+                  title="Hatha y Meditación"
+                  data-bs-content="Combinación de posturas de Hatha Yoga y técnicas de meditación guiada para un bienestar integral.">
                   <strong>Hatha y Meditación</strong><br>
                   Manuel<br>
                   90 min.
@@ -88,7 +94,9 @@
               <td class="hour-col">17:00</td>
               <td></td>
               <td>
-                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0" title="Yoga Kundalini" data-bs-content="Sesión energética que combina respiración, posturas, mantras y meditación para activar la energía interna.">
+                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0"
+                  title="Yoga Kundalini"
+                  data-bs-content="Sesión energética que combina respiración, posturas, mantras y meditación para activar la energía interna.">
                   <strong>Yoga Kundalini</strong><br>
                   Manuel<br>
                   60 min.
@@ -96,7 +104,9 @@
               </td>
               <td></td>
               <td>
-                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0" title="Yoga Kundalini" data-bs-content="Sesión energética que combina respiración, posturas, mantras y meditación para activar la energía interna.">
+                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0"
+                  title="Yoga Kundalini"
+                  data-bs-content="Sesión energética que combina respiración, posturas, mantras y meditación para activar la energía interna.">
                   <strong>Yoga Kundalini</strong><br>
                   Manuel<br>
                   60 min.
@@ -109,28 +119,34 @@
             <tr>
               <td class="hour-col">18:00</td>
               <td>
-                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0" title="Yoga Terapéutico" data-bs-content="Clase enfocada en la prevención y recuperación de lesiones, adaptada a las necesidades de cada alumno.">
+                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0"
+                  title="Yoga Terapéutico"
+                  data-bs-content="Clase enfocada en la prevención y recuperación de lesiones, adaptada a las necesidades de cada alumno.">
                   <strong>Yoga Terapéutico</strong><br>
                   Mariana<br>
                   60 min.
                 </div>
               </td>
               <td>
-                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0" title="Hatha Yoga" data-bs-content="Clase suave para todos los niveles, centrada en la respiración, la relajación y la alineación postural.">
+                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0" title="Hatha Yoga"
+                  data-bs-content="Clase suave para todos los niveles, centrada en la respiración, la relajación y la alineación postural.">
                   <strong>Hatha Yoga</strong><br>
                   Sara<br>
                   60 min.<br>
                 </div>
               </td>
               <td>
-                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0" title="Yoga Terapéutico" data-bs-content="Clase enfocada en la prevención y recuperación de lesiones, adaptada a las necesidades de cada alumno.">
+                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0"
+                  title="Yoga Terapéutico"
+                  data-bs-content="Clase enfocada en la prevención y recuperación de lesiones, adaptada a las necesidades de cada alumno.">
                   <strong>Yoga Terapéutico</strong><br>
                   Mariana<br>
                   60 min.
                 </div>
               </td>
               <td>
-                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0" title="Hatha Yoga" data-bs-content="Clase suave para todos los niveles, centrada en la respiración, la relajación y la alineación postural. También disponible online.">
+                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0" title="Hatha Yoga"
+                  data-bs-content="Clase suave para todos los niveles, centrada en la respiración, la relajación y la alineación postural. También disponible online.">
                   <strong>Hatha Yoga</strong><br>
                   Sara<br>
                   60 min.<br>
@@ -143,28 +159,34 @@
             <tr>
               <td class="hour-col">20:00</td>
               <td>
-                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0" title="Hatha Yoga" data-bs-content="Clase suave para todos los niveles, centrada en la respiración, la relajación y la alineación postural. También disponible online.">
+                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0" title="Hatha Yoga"
+                  data-bs-content="Clase suave para todos los niveles, centrada en la respiración, la relajación y la alineación postural. También disponible online.">
                   <strong>Hatha Yoga</strong><br>
                   Sara<br>
                   60 min.<br>
                 </div>
               </td>
               <td>
-                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0" title="Vinyasa Yoga" data-bs-content="Clase dinámica que sincroniza movimiento y respiración, ideal para quienes buscan energía y fluidez.">
+                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0"
+                  title="Vinyasa Yoga"
+                  data-bs-content="Clase dinámica que sincroniza movimiento y respiración, ideal para quienes buscan energía y fluidez.">
                   <strong>Vinyasa Yoga</strong><br>
                   Mariana<br>
                   60 min.
                 </div>
               </td>
               <td>
-                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0" title="Hatha Yoga" data-bs-content="Clase suave para todos los niveles, centrada en la respiración, la relajación y la alineación postural. También disponible online.">
+                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0" title="Hatha Yoga"
+                  data-bs-content="Clase suave para todos los niveles, centrada en la respiración, la relajación y la alineación postural. También disponible online.">
                   <strong>Hatha Yoga</strong><br>
                   Sara<br>
                   60 min.<br>
                 </div>
               </td>
               <td>
-                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0" title="Vinyasa Yoga" data-bs-content="Clase dinámica que sincroniza movimiento y respiración, ideal para quienes buscan energía y fluidez.">
+                <div class="class-info" data-bs-toggle="popover" data-bs-trigger="focus" tabindex="0"
+                  title="Vinyasa Yoga"
+                  data-bs-content="Clase dinámica que sincroniza movimiento y respiración, ideal para quienes buscan energía y fluidez.">
                   <strong>Vinyasa Yoga</strong><br>
                   Mariana<br>
                   60 min.
@@ -177,7 +199,6 @@
           </tbody>
         </table>
       </div>
-
       <!-- Tarjetas para móvil -->
       <div class="d-block d-md-none">
         <!-- 9:00 -->
@@ -277,21 +298,15 @@
           </div>
         </div>
       </div>
-
       <p class="text-center text-muted mt-3" style="font-size:0.9em;">
         <i class="bi bi-info-circle"></i>
         Haz clic en una clase para más información.
       </p>
     </div>
-<!-- Incluye el footer-fragment -->
-	<div th:replace="~{fragments/footer :: footer}"></div>
+  </main>
+  <!-- Incluye el footer-fragment -->
+  <div th:replace="~{fragments/footer :: footer}"></div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // Activa todos los popovers de la página
-    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-      return new bootstrap.Popover(popoverTriggerEl)
-    });
-  </script>
+  <script th:src="@{js/script.js}"></script>
 </body>
 </html>

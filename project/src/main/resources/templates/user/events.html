@@ -1,56 +1,53 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eventos</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.6/dist/minty/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" th:href="@{/css/custom.css}">
-  <style>
-       
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.6/dist/minty/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
 </head>
+
 <body>
-		<!-- Incluye el navbar-fragment -->
-		<header>
-			<div th:replace="~{fragments/navbar :: navbar}"></div>
-		</header>
- <div class="container py-4 mt-5">
-        <h1 class="mb-4 text-center">Próximos Eventos</h1>
-
-        <!-- Si no hay eventos -->
-        <div th:if="${#lists.isEmpty(events)}" class="alert alert-info text-center">
-            No hay eventos próximos.
-        </div>
-
-        <!-- Listado de eventos -->
-        <div class="row" th:unless="${#lists.isEmpty(events)}">
-            <div class="col-md-4 mb-4" th:each="event : ${events}">
-                <div class="card event-card h-100">
-                    <img th:if="${event.imageUrl != null}" th:src="${event.imageUrl}" class="card-img-top" alt="Imagen del evento">
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="${event.title}">Título del evento</h5>
-                        <p class="card-text">
-                            <strong>Fecha:</strong>
-                            <span th:text="${#temporals.format(event.eventDate, 'dd/MM/yyyy')}">01/01/2025</span><br>
-                            <strong>Lugar:</strong>
-                            <span th:text="${event.location}">Lugar</span>
-                        </p>
-                        <p class="card-text" th:text="${event.description}">Descripción del evento</p>
-                        <!-- Puedes agregar un botón para ver más detalles si tienes página de detalle -->
-                        <!-- <a th:href="@{/events/{id}(id=${event.id})}" class="btn btn-outline-primary btn-sm">Ver detalles</a> -->
+    <!-- Incluye el navbar-fragment -->
+    <header th:replace="~{fragments/navbar :: navbar}"></header>
+    <main class="flex-file">
+        <div class="container py-4 mt-5">
+            <h1 class="mb-4 text-center">Próximos Eventos</h1>
+            <!-- Si no hay eventos -->
+            <div th:if="${#lists.isEmpty(events)}" class="alert alert-info text-center">
+                No hay eventos próximos.
+            </div>
+            <!-- Listado de eventos -->
+            <div class="row justify-content-center" th:unless="${#lists.isEmpty(events)}">
+                <div class="col-lg-4 col-md-6 mb-4 d-flex" th:each="event : ${events}">
+                    <div class="card event-card h-100 w-100">
+                        <img th:if="${event.imageUrl != null}" th:src="${event.imageUrl}" class="card-img-top"
+                            alt="Imagen del evento">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${event.title}">Título del evento</h5>
+                            <p class="card-text">
+                                <strong>Fecha:</strong>
+                                <span
+                                    th:text="${#temporals.format(event.eventDate, 'dd/MM/yyyy')}">01/01/2025</span><br>
+                                <strong>Lugar:</strong>
+                                <span th:text="${event.location}">Lugar</span>
+                            </p>
+                            <p class="card-text" th:text="${event.description}">Descripción del evento</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-	<!-- Incluye el footer-fragment -->
-	<div th:replace="~{fragments/footer :: footer}"></div>
-<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
-		crossorigin="anonymous"></script>
+    </main>
+    <!-- Incluye el footer-fragment -->
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

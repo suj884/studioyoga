@@ -34,26 +34,27 @@ public class PublicClassesController {
     @Autowired
     private ReservationService reservationService;
 
-@GetMapping
-public String showClasses(Model model) {
-   List<ClassesDTO> classesList = classesService.findUpcomingClassesWithSpots();
-   System.out.println("Clases encontradas: " + classesList.size());
-   for (ClassesDTO dto : classesList) {
-       System.out.println(dto.getClasses().getEventDate() + " - " + dto.getClasses().getTitle());
-   }
+    @GetMapping
+    public String showClasses(Model model) {
+        List<ClassesDTO> classesList = classesService.findUpcomingClassesWithSpots();
+        System.out.println("Clases encontradas: " + classesList.size());
+        for (ClassesDTO dto : classesList) {
+            System.out.println(dto.getClasses().getEventDate() + " - " + dto.getClasses().getTitle());
+        }
 
-   Map<LocalDate, List<ClassesDTO>> clasesPorFecha = classesList.stream()
-       .collect(Collectors.groupingBy(dto -> dto.getClasses().getEventDate(), LinkedHashMap::new, Collectors.toList()));
-   model.addAttribute("clasesPorFecha", clasesPorFecha);
+        Map<LocalDate, List<ClassesDTO>> clasesPorFecha = classesList.stream()
+                .collect(Collectors.groupingBy(dto -> dto.getClasses().getEventDate(), LinkedHashMap::new,
+                        Collectors.toList()));
+        model.addAttribute("clasesPorFecha", clasesPorFecha);
 
-   return "user/classes";
-}
-// @GetMapping("/user/classes")
-// public String showUserClasses(Model model) {
-//     model.addAttribute("classesList", classesService.findUpcomingClassesWithSpots());
-//     return "user/classes";
-// }
-
+        return "user/classes";
+    }
+    // @GetMapping("/user/classes")
+    // public String showUserClasses(Model model) {
+    // model.addAttribute("classesList",
+    // classesService.findUpcomingClassesWithSpots());
+    // return "user/classes";
+    // }
 
     @PostMapping("/reserve/{id}")
     public String reserveClass(@PathVariable Integer id, Principal principal, RedirectAttributes redirectAttributes) {
@@ -80,7 +81,8 @@ public String showClasses(Model model) {
     }
 
     @PostMapping("/cancelReservation/{id}")
-    public String cancelReservation(@PathVariable Integer id, Principal principal, RedirectAttributes redirectAttributes) {
+    public String cancelReservation(@PathVariable Integer id, Principal principal,
+            RedirectAttributes redirectAttributes) {
         if (principal == null) {
             return "redirect:/login";
         }
@@ -93,4 +95,21 @@ public String showClasses(Model model) {
         }
         return "redirect:/classes/myReservations";
     }
+
+    @GetMapping("/confirm-cancel/{id}")
+    public String confirmCancelReservation(@PathVariable Integer id, Principal principal, Model model) {
+        if (principal == null) {
+            return "redirect:/login";
+        }
+        User user = userService.findByEmail(principal.getName());
+        var reservation = reservationService.findByUserAndId(user, id);
+        if (reservation == null) {
+            // Puedes redirigir con un mensaje de error si la reserva no existe o no
+            // pertenece al usuario
+            return "redirect:/classes/myReservations";
+        }
+        model.addAttribute("reservation", reservation);
+        return "user/confirmCancelReservation"; // Tu plantilla de confirmación
+    }
+
 }

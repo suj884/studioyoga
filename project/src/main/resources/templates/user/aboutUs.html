@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.6/dist/minty/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
+    <link rel="stylesheet" th:href="@{/css/aboutUs.css}">
+
+</head>
+<body>
+        <!-- Incluye el navbar-fragment -->
+    <header th:replace="~{fragments/navbar :: navbar}"></header>
+    <div class="container py-5 mt-5">
+        <h1 class="text-center mb-4">Sobre Nosotros</h1>
+        <p class="lead text-center mb-5">
+            En Studio Yoga creemos en el bienestar integral. Nuestro equipo está formado por profesionales apasionados
+            por el yoga, la meditación y el crecimiento personal.<br>
+            Descubre quiénes somos:
+        </p>
+        <div class="row justify-content-center g-4">
+            <!-- Miembro del equipo 1 -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex">
+                <div class="card flex-fill align-items-center text-center shadow-sm">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="María López" class="team-img mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title mb-1">Sara López</h5>
+                        <p class="card-text text-muted mb-2">Instructora Principal</p>
+                        <p class="small">Especialista en Hatha Yoga y mindfulness. Más de 10 años de experiencia guiando
+                            a personas hacia su mejor versión.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Miembro del equipo 2 -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex">
+                <div class="card flex-fill align-items-center text-center shadow-sm">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Carlos Ruiz" class="team-img mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title mb-1">Manuel Ruiz</h5>
+                        <p class="card-text text-muted mb-2">Profesor de Vinyasa</p>
+                        <p class="small">Apasionado por el movimiento y la respiración consciente. Amante del yoga
+                            dinámico y la música.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Miembro del equipo 3 -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex">
+                <div class="card flex-fill align-items-center text-center shadow-sm">
+                    <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Lucía García"
+                        class="team-img mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title mb-1">Lucía García</h5>
+                        <p class="card-text text-muted mb-2">Atención al Cliente</p>
+                        <p class="small">Te ayudará a resolver cualquier duda y hará que tu experiencia en Studio Yoga
+                            sea siempre positiva.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Puedes añadir más miembros duplicando el bloque anterior -->
+        </div>
+    </div>
+    <!-- Incluye el footer-fragment -->
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

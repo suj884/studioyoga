@@ -141,5 +141,9 @@ public class ReservationService {
 public void deleteByUserId(Integer userId) {
     reservationRepository.deleteByUserId(userId);
 }
+public Reservation findByUserAndId(User user, Integer reservationId) {
+    return reservationRepository.findByIdAndUser(reservationId, user).orElse(null);
+}
+
 
 }

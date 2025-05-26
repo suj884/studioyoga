@@ -5,11 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Normas y recomendaciones</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.6/dist/minty/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" th:href="@{/css/custom.css}">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.6/dist/minty/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
 </head>
 
 <body>
@@ -17,62 +16,66 @@
     <header>
         <div th:replace="~{fragments/navbar :: navbar}"></div>
     </header>
-    <main class="content py-4 mt-5">
-        <h1><span class="material-icons zen-icon">spa</span>Normas y Recomendaciones</h1>
-        <p>
-            Nuestra escuela es un espacio dedicado a la exploración profunda de la práctica del yoga. Nuestras normas
-            reflejan los principios fundamentales del yoga (Yamas y Niyamas), estableciendo un marco que permite el
-            desarrollo armónico de esta enseñanza. Cada norma está diseñada para mantener un ambiente de respeto,
-            equidad y bienestar para todos los practicantes.
-        </p>
-        <hr class="section-divider">
+    <main class="flex-fill">
+        <div class="container py-4 mt-5">
+            <h1><span class="material-icons zen-icon">spa</span>Normas y Recomendaciones</h1>
+            <p>
+                Nuestra escuela es un espacio dedicado a la exploración profunda de la práctica del yoga. Nuestras
+                normas
+                reflejan los principios fundamentales del yoga (Yamas y Niyamas), estableciendo un marco que permite el
+                desarrollo armónico de esta enseñanza. Cada norma está diseñada para mantener un ambiente de respeto,
+                equidad y bienestar para todos los practicantes.
+            </p>
+            <hr class="section-divider">
+            <h2><span class="material-icons zen-icon">event_available</span>Suscripción y Reservas</h2>
+            <h3 class="section-subtitle">Sistema de Reservas</h3>
+            <p>Para reservar tu plaza, utiliza nuestro sistema online disponible en la web o app. Las reservas se pueden
+                realizar con hasta 30 días de antelación.</p>
+            <h3 class="section-subtitle">Políticas de Membresía</h3>
+            <p>Las membresías son personales e intransferibles. Puedes modificar tu plan o cancelar con un preaviso de
+                15
+                días antes del próximo cobro.</p>
+            <h3 class="section-subtitle">Cancelaciones y Recuperaciones</h3>
+            <p>Las cancelaciones deben realizarse al menos 2 horas antes de la clase para evitar la pérdida de la
+                sesión.
+                Las clases perdidas pueden recuperarse dentro del mismo mes.</p>
+            <hr class="section-divider">
 
-        <h2><span class="material-icons zen-icon">event_available</span>Suscripción y Reservas</h2>
-        <h3 class="section-subtitle">Sistema de Reservas</h3>
-        <p>Para reservar tu plaza, utiliza nuestro sistema online disponible en la web o app. Las reservas se pueden
-            realizar con hasta 30 días de antelación.</p>
-        <h3 class="section-subtitle">Políticas de Membresía</h3>
-        <p>Las membresías son personales e intransferibles. Puedes modificar tu plan o cancelar con un preaviso de 15
-            días antes del próximo cobro.</p>
-        <h3 class="section-subtitle">Cancelaciones y Recuperaciones</h3>
-        <p>Las cancelaciones deben realizarse al menos 2 horas antes de la clase para evitar la pérdida de la sesión.
-            Las clases perdidas pueden recuperarse dentro del mismo mes.</p>
-        <hr class="section-divider">
+            <h2><span class="material-icons zen-icon">access_time</span>Asistencia y Puntualidad</h2>
+            <h3 class="section-subtitle">Antes de la Clase</h3>
+            <p>Te recomendamos llegar con al menos 10 minutos de antelación para prepararte y comenzar puntualmente.</p>
+            <hr class="section-divider">
 
-        <h2><span class="material-icons zen-icon">access_time</span>Asistencia y Puntualidad</h2>
-        <h3 class="section-subtitle">Antes de la Clase</h3>
-        <p>Te recomendamos llegar con al menos 10 minutos de antelación para prepararte y comenzar puntualmente.</p>
-        <hr class="section-divider">
+            <h2><span class="material-icons zen-icon">self_improvement</span>Práctica Segura y Respetuosa</h2>
+            <h3 class="section-subtitle">Durante la Práctica</h3>
+            <p>Escucha a tu cuerpo y respeta tus límites. No dudes en informar al instructor sobre cualquier molestia o
+                lesión.</p>
+            <h3 class="section-subtitle">En la Sala</h3>
+            <p>Mantén el silencio y evita distracciones para crear un ambiente propicio para la concentración y el
+                bienestar.</p>
+            <h3 class="section-subtitle">Material y Equipamiento</h3>
+            <p>Disponemos de esterillas y accesorios, pero puedes traer tu propio material si lo prefieres.</p>
+            <hr class="section-divider">
 
-        <h2><span class="material-icons zen-icon">self_improvement</span>Práctica Segura y Respetuosa</h2>
-        <h3 class="section-subtitle">Durante la Práctica</h3>
-        <p>Escucha a tu cuerpo y respeta tus límites. No dudes en informar al instructor sobre cualquier molestia o
-            lesión.</p>
-        <h3 class="section-subtitle">En la Sala</h3>
-        <p>Mantén el silencio y evita distracciones para crear un ambiente propicio para la concentración y el
-            bienestar.</p>
-        <h3 class="section-subtitle">Material y Equipamiento</h3>
-        <p>Disponemos de esterillas y accesorios, pero puedes traer tu propio material si lo prefieres.</p>
-        <hr class="section-divider">
+            <h2><span class="material-icons zen-icon">clean_hands</span>Higiene y Cuidado Personal</h2>
+            <h3 class="section-subtitle">Preparación para la Clase</h3>
+            <p>Por respeto a todos, acude aseado y con ropa cómoda y limpia.</p>
+            <h3 class="section-subtitle">Consideraciones Especiales</h3>
+            <p>Si tienes alguna condición médica, consulta con tu médico antes de comenzar la práctica y comunícalo al
+                instructor.</p>
+            <hr class="section-divider">
 
-        <h2><span class="material-icons zen-icon">clean_hands</span>Higiene y Cuidado Personal</h2>
-        <h3 class="section-subtitle">Preparación para la Clase</h3>
-        <p>Por respeto a todos, acude aseado y con ropa cómoda y limpia.</p>
-        <h3 class="section-subtitle">Consideraciones Especiales</h3>
-        <p>Si tienes alguna condición médica, consulta con tu médico antes de comenzar la práctica y comunícalo al
-            instructor.</p>
-        <hr class="section-divider">
+            <h2><span class="material-icons zen-icon">notifications_off</span>Antes de la Clase</h2>
+            <p>Apaga o silencia dispositivos móviles para evitar interrupciones.</p>
+            <hr class="section-divider">
 
-        <h2><span class="material-icons zen-icon">notifications_off</span>Antes de la Clase</h2>
-        <p>Apaga o silencia dispositivos móviles para evitar interrupciones.</p>
-        <hr class="section-divider">
+            <h2><span class="material-icons zen-icon">done_all</span>Después de la Clase</h2>
+            <p>Recoge tu material y deja el espacio limpio para el siguiente grupo.</p>
+            <hr class="section-divider">
 
-        <h2><span class="material-icons zen-icon">done_all</span>Después de la Clase</h2>
-        <p>Recoge tu material y deja el espacio limpio para el siguiente grupo.</p>
-        <hr class="section-divider">
-
-        <h2><span class="material-icons zen-icon">favorite</span>Principio de Ahimsa en la Práctica</h2>
-        <p>Practica con compasión hacia ti mismo y hacia los demás, fomentando un ambiente de respeto y armonía.</p>
+            <h2><span class="material-icons zen-icon">favorite</span>Principio de Ahimsa en la Práctica</h2>
+            <p>Practica con compasión hacia ti mismo y hacia los demás, fomentando un ambiente de respeto y armonía.</p>
+        </div>
     </main>
     <!-- Incluye el footer-fragment -->
     <div th:replace="~{fragments/footer :: footer}"></div>
