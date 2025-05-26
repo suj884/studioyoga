@@ -46,12 +46,10 @@ public class ClassController {
                 .getDisplayName(TextStyle.FULL, new Locale("es")).toUpperCase();
         String time = classes.getTimeInit().format(DateTimeFormatter.ofPattern("HH:mm"));
         String className = classes.getTitle();
-
         if (!classesService.isAllowedSchedule(dayOfWeek, time, className)) {
             redirectAttributes.addFlashAttribute("error", "No puedes registrar esa clase en ese horario.");
             return "redirect:/admin/classes/new";
         }
-
         boolean exists;
         if (classes.getId() != null) {
             // Edición: excluir la propia clase
@@ -61,12 +59,10 @@ public class ClassController {
             // Creación: comprobar normalmente
             exists = classesService.existsByDateTime(classes.getEventDate(), classes.getTimeInit());
         }
-
         if (exists) {
             redirectAttributes.addFlashAttribute("error", "Ya existe una clase registrada en esa fecha y hora.");
             return "redirect:/admin/classes/new";
         }
-
         classesService.save(classes);
         redirectAttributes.addFlashAttribute("success", "Clase guardada correctamente");
         return "redirect:/admin/classes/manageclasses";

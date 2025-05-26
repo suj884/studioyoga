@@ -4,17 +4,24 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import jakarta.transaction.Transactional;
 import studioyoga.project.model.User;
 import studioyoga.project.repository.UserRepository;
 
 @Service
 public class UserService {
 
-	private final UserRepository userRepository;
+	@Autowired
+private ReservationService reservationService;
+
+@Autowired
+private UserRepository userRepository;
 
 	public UserService(UserRepository userRepository) {
 		this.userRepository = userRepository;
@@ -94,6 +101,9 @@ public class UserService {
 
 	    return users;
 	}
-
-
+@Transactional
+public void deleteUserAndReservations(Integer userId) {
+    reservationService.deleteByUserId(userId); // Elimina todas las reservas del usuario
+    userRepository.deleteById(userId);         // Ahora puedes borrar el usuario
+}
 }

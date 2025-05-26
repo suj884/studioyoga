@@ -80,4 +80,9 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
      */
     @Transactional
     void deleteByClassesId(Integer classId);
+
+    void deleteByUserId(Integer userId);
+
+
+
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import studioyoga.project.model.BlogPost;
 import studioyoga.project.service.BlogService;
@@ -39,31 +40,46 @@ public String newPostForm(Model model) {
     model.addAttribute("post", post);
     return "admin/blogForm";
 }
-
-
-    // Mostrar formulario para editar post existente
+ // Mostrar formulario para editar post existente
     @GetMapping("/edit/{id}")
-    public String editPostForm(@PathVariable Integer id, Model model) {
+    public String editPostForm(@PathVariable Integer id, Model model, RedirectAttributes redirectAttributes) {
         Optional<BlogPost> postOpt = blogService.findById(id);
         if (postOpt.isPresent()) {
             model.addAttribute("post", postOpt.get());
             return "admin/blogForm";
         } else {
-            return "redirect:/blog/manage";
+            redirectAttributes.addFlashAttribute("error", "No se ha encontrado el post solicitado.");
+            return "redirect:/admin/blog/manageblog";
         }
     }
 
     // Guardar nuevo post o actualizar existente
     @PostMapping("/save")
-    public String savePost(@ModelAttribute BlogPost post) {
+    public String savePost(@ModelAttribute BlogPost post, RedirectAttributes redirectAttributes) {
         blogService.save(post);
-        return "redirect:/blog/manage";
+        redirectAttributes.addFlashAttribute("success", "Entrada de blog guardada correctamente.");
+        return "redirect:/admin/blog/manageblog";
     }
 
     // Eliminar post
-    @GetMapping("/delete/{id}")
-    public String deletePost(@PathVariable Integer id) {
+    @PostMapping("/delete/{id}")
+    public String deletePost(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         blogService.deleteById(id);
-        return "redirect:/blog/manage";
+        redirectAttributes.addFlashAttribute("success", "Entrada de blog eliminada correctamente.");
+        return "redirect:/admin/blog/manageblog";
     }
+@GetMapping("/confirm-delete/{id}")
+public String confirmDelete(@PathVariable Integer id, Model model) {
+    BlogPost post = blogService.findById(id).orElse(null);
+    if (post == null) {
+        model.addAttribute("error", "No se encontró el post.");
+        return "redirect:/admin/blog/manageblog";
+    }
+    model.addAttribute("message", "¿Seguro que quieres eliminar el post: '" + post.getTitle() + "'?");
+    model.addAttribute("action", "/admin/blog/delete/" + id);
+    model.addAttribute("cancelUrl", "/admin/blog/manageblog");
+    return "admin/confirm-delete"; // Vista que solo incluye el fragmento
+}
+
+
 }

@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
 import studioyoga.project.exception.AlreadyReservedException;
 import studioyoga.project.exception.NoSpotsAvailableException;
 import studioyoga.project.model.Classes;
@@ -135,5 +136,10 @@ public class ReservationService {
 	public List<Reservation> findAll() {
 		return reservationRepository.findAll();
 	}
+// Delete all reservations by user ID (admin)
+@Transactional
+public void deleteByUserId(Integer userId) {
+    reservationRepository.deleteByUserId(userId);
+}
 
 }
