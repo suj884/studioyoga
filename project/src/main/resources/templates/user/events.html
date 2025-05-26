@@ -15,7 +15,7 @@
     <!-- Incluye el navbar-fragment -->
     <header th:replace="~{fragments/navbar :: navbar}"></header>
     <main class="flex-file">
-        <div class="container py-4 mt-5">
+        <div class="container py-5 mt-5">
             <h1 class="mb-4 text-center">Próximos Eventos</h1>
             <!-- Si no hay eventos -->
             <div th:if="${#lists.isEmpty(events)}" class="alert alert-info text-center">

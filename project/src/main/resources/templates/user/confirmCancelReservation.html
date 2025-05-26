@@ -13,13 +13,16 @@
 </head>
 <body>
     <header th:replace="~{fragments/navbar :: navbar}"></header>
-    <main class="container py-5">
-        <div th:replace="~{fragments/confirmDelete :: confirmDelete(
-            '¿Seguro que quieres cancelar tu reserva de ' + ${reservation.classes.title} + ' el ' + ${#temporals.format(reservation.classes.eventDate, 'dd/MM/yyyy')} + '?' ,
-            @{/classes/cancelReservation/{id}(id=${reservation.id})},
-            @{/classes}
-        )}"></div>
-    </main>
+    <main class="flex-fill">
+        <div class="container py-5 mt-5 min-vh-100">
+
+            <div th:replace="~{fragments/confirmDelete :: confirmDelete(
+                '¿Seguro que quieres cancelar tu reserva de ' + ${reservation.classes.title} + ' el ' + ${#temporals.format(reservation.classes.eventDate, 'dd/MM/yyyy')} + '?' ,
+                @{/classes/cancelReservation/{id}(id=${reservation.id})},
+                @{/classes}
+                )}"></div>
+            </div>
+            </main>
     <footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>
 </html>

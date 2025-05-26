@@ -49,23 +49,16 @@ public class PublicClassesController {
 
         return "user/classes";
     }
-    // @GetMapping("/user/classes")
-    // public String showUserClasses(Model model) {
-    // model.addAttribute("classesList",
-    // classesService.findUpcomingClassesWithSpots());
-    // return "user/classes";
-    // }
-
-    @PostMapping("/reserve/{id}")
+     @PostMapping("/reserve/{id}")
     public String reserveClass(@PathVariable Integer id, Principal principal, RedirectAttributes redirectAttributes) {
         User user = userService.findByEmail(principal.getName());
         try {
             reservationService.reserveClass(user, id);
-            redirectAttributes.addFlashAttribute("success", "Reservation completed successfully!");
+            redirectAttributes.addFlashAttribute("success", "Reserva realizada correctamente.");
         } catch (NoSpotsAvailableException e) {
-            redirectAttributes.addFlashAttribute("error", "No spots available!");
+            redirectAttributes.addFlashAttribute("error", "No hay plazas disponibles para esta clase.");
         } catch (AlreadyReservedException e) {
-            redirectAttributes.addFlashAttribute("error", "You have already reserved this class!");
+            redirectAttributes.addFlashAttribute("error", "Ya has reservado esta clase.");
         }
         return "redirect:/classes";
     }
@@ -89,9 +82,9 @@ public class PublicClassesController {
         User user = userService.findByEmail(principal.getName());
         try {
             reservationService.cancelReservation(user, id);
-            redirectAttributes.addFlashAttribute("success", "Reservation cancelled successfully!");
+            redirectAttributes.addFlashAttribute("success", "Reserva cancelada correctamente.");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "Could not cancel the reservation.");
+            redirectAttributes.addFlashAttribute("error", "No es posible cancelar la reserva.");
         }
         return "redirect:/classes/myReservations";
     }
