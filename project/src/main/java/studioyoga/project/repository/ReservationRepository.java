@@ -81,7 +81,12 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
     @Transactional
     void deleteByClassesId(Integer classId);
 
-    void deleteByUserId(Integer userId);
+    /**
+     * Elimina todas las reservas asociadas a un usuario específico por su ID.
+     *
+     * @param userId ID del usuario cuyas reservas se eliminarán.
+     */
+    void deleteByUserId(Integer userId);   
 
 
 

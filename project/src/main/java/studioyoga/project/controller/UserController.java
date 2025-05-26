@@ -8,7 +8,6 @@ import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +18,13 @@ import studioyoga.project.model.Rol;
 import studioyoga.project.model.User;
 import studioyoga.project.repository.RolRepository;
 import studioyoga.project.repository.UserRepository;
+import studioyoga.project.service.RolService;
 import studioyoga.project.service.UserService;
 
+/**
+ * Controlador para la gestión de usuarios en el panel de administración.
+ * Permite listar, buscar, crear, editar, eliminar usuarios, así como cambiar contraseñas y gestionar imágenes de perfil.
+ */
 @Controller
 @RequestMapping("/admin/users")
 public class UserController {
@@ -30,7 +34,14 @@ public class UserController {
     private final UserRepository userRepository;
     private final RolRepository rolRepository;
 
-    @Autowired
+    /**
+     * Constructor que inyecta los servicios y repositorios necesarios.
+     *
+     * @param userService Servicio de usuarios.
+     * @param rolService Servicio de roles.
+     * @param userRepository Repositorio de usuarios.
+     * @param rolRepository Repositorio de roles.
+     */
     public UserController(UserService userService,
             RolService rolService,
             UserRepository userRepository,
@@ -43,6 +54,14 @@ public class UserController {
 
     // ============ MÉTODOS PRINCIPALES ============
 
+    /**
+     * Muestra la lista de usuarios, permite filtrar por nombre/apellido y rol.
+     *
+     * @param name Nombre o apellido para filtrar (opcional).
+     * @param role Rol para filtrar (opcional).
+     * @param model Modelo para pasar datos a la vista.
+     * @return Vista de administración de usuarios.
+     */
     @GetMapping("/manageuser")
     public String listUsers(
             @RequestParam(required = false) String name,
@@ -68,6 +87,12 @@ public class UserController {
 
     // ============ CREACIÓN/EDICIÓN ============
 
+    /**
+     * Muestra el formulario para crear un nuevo usuario.
+     *
+     * @param model Modelo para pasar datos a la vista.
+     * @return Vista del formulario de creación/edición de usuario.
+     */
     @GetMapping("/new")
     public String showCreateForm(Model model) {
         model.addAttribute("user", new User());
@@ -75,6 +100,15 @@ public class UserController {
         return "admin/formCreateEditUsers";
     }
 
+    /**
+     * Guarda un nuevo usuario o actualiza uno existente, gestionando la imagen de perfil.
+     *
+     * @param user Objeto User a guardar.
+     * @param file Archivo de imagen de perfil.
+     * @param redirectAttributes Atributos para mensajes flash en la redirección.
+     * @return Redirección a la vista de administración de usuarios.
+     * @throws IOException Si ocurre un error al guardar la imagen.
+     */
     @PostMapping("/save")
     public String saveUser(
             @ModelAttribute User user,
@@ -110,6 +144,13 @@ public class UserController {
         return "redirect:/admin/users/manageuser";
     }
 
+    /**
+     * Muestra el formulario de edición para un usuario existente.
+     *
+     * @param id ID del usuario a editar.
+     * @param model Modelo para pasar datos a la vista.
+     * @return Vista del formulario de edición de usuario o redirección si no se encuentra.
+     */
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Integer id, Model model) {
         User user = userService.findById(id);
@@ -125,6 +166,13 @@ public class UserController {
 
     // ============ BORRADO ============
 
+    /**
+     * Muestra una página de confirmación antes de eliminar un usuario.
+     *
+     * @param id ID del usuario a eliminar.
+     * @param model Modelo para pasar datos a la vista.
+     * @return Vista de confirmación de eliminación o redirección si no se encuentra el usuario.
+     */
     @GetMapping("/confirm-delete/{id}")
     public String confirmDelete(@PathVariable Integer id, Model model) {
         User user = userService.findById(id);
@@ -142,20 +190,34 @@ public class UserController {
         return "admin/confirm-delete";
     }
 
-@PostMapping("/delete/{id}")
-public String deleteUser(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
-    try {
-        userService.deleteUserAndReservations(id);
-        redirectAttributes.addFlashAttribute("success", "Usuario eliminado correctamente");
-    } catch (Exception e) {
-        redirectAttributes.addFlashAttribute("error", "Error al eliminar el usuario: " + e.getMessage());
+    /**
+     * Elimina un usuario y todas sus reservas asociadas.
+     *
+     * @param id ID del usuario a eliminar.
+     * @param redirectAttributes Atributos para mensajes flash en la redirección.
+     * @return Redirección a la vista de administración de usuarios.
+     */
+    @PostMapping("/delete/{id}")
+    public String deleteUser(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        try {
+            userService.deleteUserAndReservations(id);
+            redirectAttributes.addFlashAttribute("success", "Usuario eliminado correctamente");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Error al eliminar el usuario: " + e.getMessage());
+        }
+        return "redirect:/admin/users/manageuser";
     }
-    return "redirect:/admin/users/manageuser";
-}
-
 
     // ============ CAMBIO DE CONTRASEÑA ============
 
+    /**
+     * Cambia la contraseña del usuario autenticado.
+     *
+     * @param newPassword Nueva contraseña.
+     * @param principal Usuario autenticado.
+     * @param redirectAttributes Atributos para mensajes flash en la redirección.
+     * @return Redirección al perfil del usuario.
+     */
     @PostMapping("/change-password")
     public String changePassword(@RequestParam String newPassword,
             Principal principal,

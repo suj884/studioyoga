@@ -22,9 +22,14 @@ import studioyoga.project.service.UserService;
 
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+/**
+ * Controlador para la gestión pública de clases.
+ * Permite a los usuarios ver clases disponibles, reservar, consultar y cancelar sus reservas.
+ */
 @Controller
 @RequestMapping("/classes")
 public class PublicClassesController {
+
     @Autowired
     private ClassesService classesService;
 
@@ -34,22 +39,31 @@ public class PublicClassesController {
     @Autowired
     private ReservationService reservationService;
 
+    /**
+     * Muestra la lista de clases próximas agrupadas por fecha.
+     *
+     * @param model Modelo para pasar datos a la vista.
+     * @return Vista con las clases disponibles para los usuarios.
+     */
     @GetMapping
     public String showClasses(Model model) {
         List<ClassesDTO> classesList = classesService.findUpcomingClassesWithSpots();
-        System.out.println("Clases encontradas: " + classesList.size());
-        for (ClassesDTO dto : classesList) {
-            System.out.println(dto.getClasses().getEventDate() + " - " + dto.getClasses().getTitle());
-        }
-
         Map<LocalDate, List<ClassesDTO>> clasesPorFecha = classesList.stream()
                 .collect(Collectors.groupingBy(dto -> dto.getClasses().getEventDate(), LinkedHashMap::new,
                         Collectors.toList()));
         model.addAttribute("clasesPorFecha", clasesPorFecha);
-
         return "user/classes";
     }
-     @PostMapping("/reserve/{id}")
+
+    /**
+     * Permite a un usuario reservar una clase.
+     *
+     * @param id ID de la clase a reservar.
+     * @param principal Usuario autenticado.
+     * @param redirectAttributes Atributos para mensajes flash en la redirección.
+     * @return Redirección a la vista de clases con mensaje de éxito o error.
+     */
+    @PostMapping("/reserve/{id}")
     public String reserveClass(@PathVariable Integer id, Principal principal, RedirectAttributes redirectAttributes) {
         User user = userService.findByEmail(principal.getName());
         try {
@@ -63,6 +77,13 @@ public class PublicClassesController {
         return "redirect:/classes";
     }
 
+    /**
+     * Muestra las reservas del usuario autenticado.
+     *
+     * @param model Modelo para pasar datos a la vista.
+     * @param principal Usuario autenticado.
+     * @return Vista con las reservas del usuario o redirección al login si no está autenticado.
+     */
     @GetMapping("/myReservations")
     public String myReservations(Model model, Principal principal) {
         if (principal == null) {
@@ -73,6 +94,14 @@ public class PublicClassesController {
         return "user/myReservations";
     }
 
+    /**
+     * Permite a un usuario cancelar una reserva.
+     *
+     * @param id ID de la reserva a cancelar.
+     * @param principal Usuario autenticado.
+     * @param redirectAttributes Atributos para mensajes flash en la redirección.
+     * @return Redirección a la vista de reservas del usuario o al login si no está autenticado.
+     */
     @PostMapping("/cancelReservation/{id}")
     public String cancelReservation(@PathVariable Integer id, Principal principal,
             RedirectAttributes redirectAttributes) {
@@ -89,6 +118,14 @@ public class PublicClassesController {
         return "redirect:/classes/myReservations";
     }
 
+    /**
+     * Muestra una página de confirmación para cancelar una reserva.
+     *
+     * @param id ID de la reserva a cancelar.
+     * @param principal Usuario autenticado.
+     * @param model Modelo para pasar datos a la vista.
+     * @return Vista de confirmación de cancelación o redirección si no corresponde.
+     */
     @GetMapping("/confirm-cancel/{id}")
     public String confirmCancelReservation(@PathVariable Integer id, Principal principal, Model model) {
         if (principal == null) {
@@ -97,12 +134,10 @@ public class PublicClassesController {
         User user = userService.findByEmail(principal.getName());
         var reservation = reservationService.findByUserAndId(user, id);
         if (reservation == null) {
-            // Puedes redirigir con un mensaje de error si la reserva no existe o no
-            // pertenece al usuario
             return "redirect:/classes/myReservations";
         }
         model.addAttribute("reservation", reservation);
-        return "user/confirmCancelReservation"; // Tu plantilla de confirmación
+        return "user/confirmCancelReservation";
     }
 
 }

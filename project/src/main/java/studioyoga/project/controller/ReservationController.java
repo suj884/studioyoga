@@ -19,11 +19,15 @@ import studioyoga.project.service.ClassesService;
 import studioyoga.project.service.ReservationService;
 import studioyoga.project.service.UserService;
 
+/**
+ * Controlador para la gestión de reservas en el panel de administración.
+ * Permite listar, buscar, crear, editar, eliminar y activar/desactivar reservas.
+ */
 @Controller
 @RequestMapping("/admin/reservations")
 public class ReservationController {
 
-     @Autowired
+    @Autowired
     private ReservationService reservationService;
 
     @Autowired
@@ -32,7 +36,15 @@ public class ReservationController {
     @Autowired
     private UserService userService;
 
-    // Listar reservas
+    /**
+     * Muestra la lista de reservas, permite filtrar por usuario o clase, o mostrar todas.
+     *
+     * @param user Nombre del usuario para filtrar (opcional).
+     * @param className Nombre de la clase para filtrar (opcional).
+     * @param all Si es true, muestra todas las reservas.
+     * @param model Modelo para pasar datos a la vista.
+     * @return Vista de administración de reservas.
+     */
     @GetMapping("/managereservations")
     public String manageReservations(
         @RequestParam(required = false) String user,
@@ -67,7 +79,12 @@ public class ReservationController {
         return "admin/managereservations";
     }
 
-    // Mostrar formulario de creación
+    /**
+     * Muestra el formulario para crear una nueva reserva.
+     *
+     * @param model Modelo para pasar datos a la vista.
+     * @return Vista del formulario de creación de reserva.
+     */
     @GetMapping("/createReservation")
     public String showCreateForm(Model model) {
         model.addAttribute("reservation", new Reservation());
@@ -75,7 +92,14 @@ public class ReservationController {
         model.addAttribute("users", userService.findAll());
         return "admin/formReservation";
     }
-    // Guardar reserva
+
+    /**
+     * Guarda una nueva reserva.
+     *
+     * @param reservation Objeto Reservation a guardar.
+     * @param redirectAttributes Atributos para mensajes flash en la redirección.
+     * @return Redirección a la vista de administración de reservas.
+     */
     @PostMapping("/save")
     public String saveReservation(@ModelAttribute Reservation reservation, RedirectAttributes redirectAttributes) {
         reservation.setDateReservation(LocalDateTime.now());
@@ -83,7 +107,14 @@ public class ReservationController {
         redirectAttributes.addFlashAttribute("message", "Reserva guardada correctamente");
         return "redirect:/admin/managereservations";
     }
-    // Mostrar formulario de edición
+
+    /**
+     * Muestra el formulario de edición para una reserva existente.
+     *
+     * @param id ID de la reserva a editar.
+     * @param model Modelo para pasar datos a la vista.
+     * @return Vista del formulario de edición de reserva.
+     */
     @GetMapping("/editReservation/{id}")
     public String showEditForm(@PathVariable Integer id, Model model) {
         model.addAttribute("reservation", reservationService.findById(id));
@@ -91,28 +122,43 @@ public class ReservationController {
         model.addAttribute("users", userService.findAll());
         return "admin/formReservation";
     }
-    // Eliminar reserva
+
+    /**
+     * Elimina una reserva por su ID.
+     *
+     * @param id ID de la reserva a eliminar.
+     * @return Redirección a la vista de administración de reservas.
+     */
     @GetMapping("/deleteReservation/{id}")
     public String deleteReservation(@PathVariable Integer id) {
         reservationService.deleteById(id);
         return "redirect:/admin/managereservations";
     }
-    // Activar/desactivar reserva
+
+    /**
+     * Activa o desactiva una reserva (cambia su estado activo).
+     *
+     * @param id ID de la reserva a activar o desactivar.
+     * @return Redirección a la vista de administración de reservas.
+     */
     @GetMapping("/toggleReservation/{id}")
     public String toggleActive(@PathVariable Integer id) {
         reservationService.toggleActive(id);
         return "redirect:/admin/reservations/managereservations";
     }
-//     Método para obtener las reservas de un usuario específico
-//     @GetMapping("/userReservations/{userId}")
-//     public String getUserReservations(@PathVariable Integer userId, Model model) {
-//         model.addAttribute("reservations", reservationService.findByUserId(userId));
-//         return "admin/userReservations";
-//     }
-//     Método para obtener las reservas de una clase específica
-//     @GetMapping("/classReservations/{classId}")
-//     public String getClassReservations(@PathVariable Integer classId, Model model) {
-//         model.addAttribute("reservations", reservationService.findByClassesId(classId));
-//         return "admin/classReservations";
-//     }
+
+    // Métodos comentados para obtener reservas por usuario o por clase:
+    /*
+    @GetMapping("/userReservations/{userId}")
+    public String getUserReservations(@PathVariable Integer userId, Model model) {
+        model.addAttribute("reservations", reservationService.findByUserId(userId));
+        return "admin/userReservations";
+    }
+
+    @GetMapping("/classReservations/{classId}")
+    public String getClassReservations(@PathVariable Integer classId, Model model) {
+        model.addAttribute("reservations", reservationService.findByClassesId(classId));
+        return "admin/classReservations";
+    }
+    */
 }
