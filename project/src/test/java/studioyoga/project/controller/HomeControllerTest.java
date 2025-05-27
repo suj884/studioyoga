@@ -1,6 +1,5 @@
 package studioyoga.project.controller;
 
-import studioyoga.project.ProjectApplication;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -9,16 +8,25 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
 
 @WebMvcTest(HomeController.class)
-@ContextConfiguration(classes = {ProjectApplication.class})
+@org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc(addFilters = false) // Desactiva filtros de seguridad
+
 class HomeControllerTest {
 
-    @Autowired
+       @Autowired
     private MockMvc mockMvc;
+
+    @org.springframework.boot.test.mock.mockito.MockBean
+    private studioyoga.project.service.EventService eventService;
+
+    @org.springframework.boot.test.mock.mockito.MockBean
+    private studioyoga.project.service.BlogService blogService;
+
+    @org.springframework.boot.test.mock.mockito.MockBean
+    private studioyoga.project.service.GuideSectionService guideSectionService;
     
     @BeforeEach
     void setUp() {
@@ -43,14 +51,14 @@ class HomeControllerTest {
     void testRegisterPage() throws Exception {
         mockMvc.perform(get("/formRegister"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("user/register"));
+                .andExpect(view().name("user/formRegister"));
     }
 
     @Test
     void testSchedulePage() throws Exception {
-        mockMvc.perform(get("/schedules"))
+        mockMvc.perform(get("/schedule"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("user/schedules"));
+                .andExpect(view().name("user/schedule"));
     }
 
     @Test

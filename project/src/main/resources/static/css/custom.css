@@ -26,11 +26,11 @@ h1 {
   letter-spacing: 1px;
 }
 
-h2 {
+/* h2 {
   font-size: 1.5rem;
   margin-top: 2.5rem;
   margin-bottom: 1rem;
-}
+} */
 
 h3.section-subtitle,
 h3 {
@@ -76,6 +76,7 @@ ul {
   border: 1px solid #b2dfdb;
 
 }
+
 /* cards */
 .card img {
   max-height: 220px;
@@ -191,5 +192,5 @@ ul {
 /* mediaqueries */
 @media (min-width: 1200px) {
   main.flex-fill {
-    min-height: calc(100vh - 90px); /* Ajusta 90px a la altura real del footer */
+    min-height: calc(100vh - 5.625rem); 
   }}

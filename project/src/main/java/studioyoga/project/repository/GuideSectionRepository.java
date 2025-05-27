@@ -16,4 +16,13 @@ public interface GuideSectionRepository extends JpaRepository<GuideSection, Long
      * @return Lista de secciones de la guía ordenadas por el campo de orden.
      */
     List<GuideSection> findAllByOrderBySectionOrderAsc();
+
+    /**
+     * Busca una sección de la guía por su identificador.
+     *
+     * @param id Identificador de la sección de la guía.
+     * @return Sección de la guía con el identificador especificado, o {@code null} si no se encuentra.
+     */
+    GuideSection findById(long id);
+
 }

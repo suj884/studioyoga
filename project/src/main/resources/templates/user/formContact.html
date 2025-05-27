@@ -24,6 +24,14 @@
                         <h4 class="card-title mb-3">Envíanos un mensaje</h4>
                         <form th:action="@{/contact}" method="post">
                             <div class="mb-3">
+                                <label for="motivo" class="form-label">Motivo</label>
+                                <select class="form-select" id="motivo" name="motivo" required>
+                                    <option value="general">Consulta general</option>
+                                    <option value="soporte">Soporte / Incidencia</option>
+                                    <option value="registro">Solicitud de registro</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
                                 <label for="nombre" class="form-label">Nombre</label>
                                 <input type="text" class="form-control" id="nombre" name="nombre" required>
                             </div>

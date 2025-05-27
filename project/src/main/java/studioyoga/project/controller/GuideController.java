@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import studioyoga.project.model.GuideSection;
 import studioyoga.project.service.GuideSectionService;
@@ -94,16 +95,20 @@ public class GuideController {
         guideSectionService.saveSection(section);
         return "redirect:/admin/guide/manageguide";
     }
+ 
+        @GetMapping("/confirm-delete/{id}")
+    public String confirmDelete(@PathVariable Long id, Model model) {
+        GuideSection section = guideSectionService.getSectionById(id);
+        model.addAttribute("message", "¿Seguro que quieres eliminar la sección: '" + section.getTitle() + "'?");
+        model.addAttribute("action", "/admin/guide/delete/" + id);
+        model.addAttribute("cancelUrl", "/admin/guide/manageguide");
+        return "admin/confirm-delete";
+    }
 
-    /**
-     * Elimina una sección de la guía por su ID.
-     *
-     * @param id ID de la sección a eliminar.
-     * @return Redirección a la vista de administración de secciones.
-     */
     @PostMapping("/delete/{id}")
-    public String deleteSection(@PathVariable Long id) {
+    public String deleteSection(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         guideSectionService.deleteSectionById(id);
+        redirectAttributes.addFlashAttribute("success", "Sección eliminada correctamente.");
         return "redirect:/admin/guide/manageguide";
     }
 

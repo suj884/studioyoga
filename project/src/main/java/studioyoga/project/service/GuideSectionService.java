@@ -61,4 +61,5 @@ public class GuideSectionService {
     public void deleteSectionById(Long id) {
         repository.deleteById(id);
     }
+
 }
