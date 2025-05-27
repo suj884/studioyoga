@@ -125,6 +125,7 @@ public class UserService {
      * @return Lista de usuarios que cumplen los criterios.
      */
     public List<User> findUsersBySurnameAndNameAndRole(String name, String role) {
+        final String finalRole = role;
         List<User> users;
 
         boolean hasName = (name != null && !name.trim().isEmpty());
@@ -136,7 +137,7 @@ public class UserService {
                 .findByFirstLastNameContainingIgnoreCaseOrSecondLastNameContainingIgnoreCaseOrNameContainingIgnoreCase(
                     name, name, name)
                 .stream()
-                .filter(u -> u.getRol() != null && role.equalsIgnoreCase(u.getRol().getName()))
+                .filter(u -> u.getRol() != null && finalRole.equalsIgnoreCase(u.getRol().getName()))
                 .collect(Collectors.toList());
         } else if (hasName) {
             users = userRepository
