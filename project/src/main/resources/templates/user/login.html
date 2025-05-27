@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Login</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.6/dist/minty/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" th:href="@{/css/custom.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.6/dist/minty/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
+
 <body class="bg-light">
-	<!-- Incluye el navbar-fragment -->
-	<header>
-        <div th:replace="~{fragments/navbar :: navbar}"></div>
-        </header>
+    <!-- Incluye el navbar-fragment -->
+        <header th:replace="~{fragments/navbar :: navbar}"></header>
     <div class="container d-flex justify-content-center align-items-center min-vh-100 py-4 mt-5">
         <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%;">
             <form th:action="@{/login}" method="post">
@@ -22,7 +22,7 @@
                 </div>
 
                 <div th:if="${param.error}" class="alert alert-danger text-center" role="alert">
-                     Credenciales inválidas.
+                    Credenciales inválidas.
                 </div>
 
                 <div class="mb-3">
@@ -39,14 +39,17 @@
                     <button type="submit" class="btn btn-primary">Entrar</button>
                 </div>
             </form>
-            ¿No tienes cuenta? <a th:href="@{/formRegister}">Regístrate aquí</a>
+            ¿No tienes cuenta?
+            <a th:href="@{/formContact}">Solicita tu registro aquí</a>
             <br>
-            <a th:href="@{/reset-password}" class="text-decoration-none">¿Olvidaste tu contraseña?</a>
-            
+            <a th:href="@{/forgot-password}" class="text-decoration-none">¿Olvidaste tu contraseña?</a>
         </div>
     </div>
-<!-- Incluye el footer-fragment -->
-<div th:replace="~{fragments/footer :: footer}"></div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <!-- Incluye el footer-fragment -->
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
