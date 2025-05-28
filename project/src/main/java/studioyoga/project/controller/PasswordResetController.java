@@ -41,7 +41,7 @@ public class PasswordResetController {
         }
         redirectAttributes.addFlashAttribute("success",
                 "Si el correo está registrado, recibirás instrucciones para restablecer tu contraseña.");
-       return "redirect:/forgot-password";
+        return "redirect:/forgot-password";
 
     }
 
@@ -55,7 +55,7 @@ public class PasswordResetController {
         return "user/resetPassword";
     }
 
-     @PostMapping("/reset-password")
+    @PostMapping("/reset-password")
     public String processResetPassword(@RequestParam String token,
             @RequestParam String newPassword,
             @RequestParam String confirmPassword,

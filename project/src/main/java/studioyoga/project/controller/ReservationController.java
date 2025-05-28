@@ -2,6 +2,7 @@ package studioyoga.project.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -146,6 +147,35 @@ public class ReservationController {
         reservationService.toggleActive(id);
         return "redirect:/admin/reservations/managereservations";
     }
+@GetMapping("/confirm-delete/{id}")
+public String confirmDelete(@PathVariable Integer id, Model model) {
+    Optional<Reservation> reservationOptional = reservationService.findById(id);
+    if (!reservationOptional.isPresent()) {
+        // Manejar el caso de que la reserva no exista
+        model.addAttribute("error", "Reserva no encontrada");
+        return "redirect:/admin/reservations/managereservations";
+    }
+    Reservation reservation = reservationOptional.get();
+    model.addAttribute("message", "¿Seguro que quieres eliminar la reserva de " +
+        reservation.getUser().getName() + " en la clase " +
+        reservation.getClasses().getTitle() + "?");
+    model.addAttribute("action", "/admin/reservations/delete/" + id);
+    model.addAttribute("cancelUrl", "/admin/reservations/managereservations");
+    return "admin/confirm-delete";
+}
+
+@PostMapping("/delete/{id}")
+public String deleteReservation(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+    reservationService.deleteById(id);
+    redirectAttributes.addFlashAttribute("success", "Reserva eliminada correctamente.");
+    return "redirect:/admin/reservations/managereservations";
+}
+
+
+
+
+
+
 
     // Métodos comentados para obtener reservas por usuario o por clase:
     /*

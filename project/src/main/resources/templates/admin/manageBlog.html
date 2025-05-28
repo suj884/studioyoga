@@ -13,6 +13,7 @@
 </head>
 
 <body class="d-flex flex-column">
+    <!-- Incluye el navbar-fragment -->
     <header th:replace="~{fragments/navbarAdmin :: navbar}"></header>
     <main class="flex-fill">
         <div class="container mt-5 py-5">
@@ -38,7 +39,7 @@
                                 style="white-space: nowrap;"></td>
                             <td>
                                 <div class="d-flex flex-column flex-sm-row gap-2">
-                                    <a class="btn btn-primary btn-sm w-100"
+                                    <a class="btn btn-warning btn-sm w-100"
                                         th:href="@{'/admin/blog/edit/' + ${post.id}}">Editar</a>
                                     <a class="btn btn-danger btn-sm w-100"
                                         th:href="@{'/admin/blog/confirm-delete/' + ${post.id}}">

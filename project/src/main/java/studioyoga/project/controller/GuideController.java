@@ -96,7 +96,14 @@ public class GuideController {
         return "redirect:/admin/guide/manageguide";
     }
  
-        @GetMapping("/confirm-delete/{id}")
+    /**
+     * Muestra una página de confirmación antes de eliminar una sección de la guía.
+     *
+     * @param id ID de la sección a eliminar.
+     * @param model Modelo para pasar datos a la vista.
+     * @return Vista de confirmación de eliminación.
+     */
+    @GetMapping("/confirm-delete/{id}")
     public String confirmDelete(@PathVariable Long id, Model model) {
         GuideSection section = guideSectionService.getSectionById(id);
         model.addAttribute("message", "¿Seguro que quieres eliminar la sección: '" + section.getTitle() + "'?");
@@ -105,6 +112,13 @@ public class GuideController {
         return "admin/confirm-delete";
     }
 
+    /**
+     * Elimina una sección de la guía por su ID y redirige a la administración de secciones.
+     *
+     * @param id ID de la sección a eliminar.
+     * @param redirectAttributes Atributos para mensajes flash en la redirección.
+     * @return Redirección a la vista de administración de secciones con mensaje de éxito.
+     */
     @PostMapping("/delete/{id}")
     public String deleteSection(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         guideSectionService.deleteSectionById(id);

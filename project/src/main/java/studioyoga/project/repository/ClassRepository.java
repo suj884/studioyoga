@@ -54,4 +54,5 @@ public interface ClassRepository extends JpaRepository<Classes, Integer> {
     @Query("SELECT COUNT(c) FROM Classes c WHERE c.eventDate = :eventDate AND c.timeInit = :timeInit AND c.id <> :id")
     int countByEventDateAndTimeInitAndIdNot(LocalDate eventDate, LocalTime timeInit, Integer id);
 
+   
 }

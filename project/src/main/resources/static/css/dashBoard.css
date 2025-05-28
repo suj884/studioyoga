@@ -1,15 +1,19 @@
 .admin-card-link {
-            text-decoration: none;
-        }
-        .admin-card {
-            transition: box-shadow 0.2s, transform 0.2s;
-            border: none;
-        }
-        .admin-card:hover {
-            box-shadow: 0 8px 24px rgba(60, 90, 60, 0.15);
-            transform: translateY(-2px) scale(1.02);
-        }
-        .admin-card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.7rem;
-        }
+    text-decoration: none;
+}
+
+.admin-card {
+    transition: box-shadow 0.2s, transform 0.2s;
+    border: none;
+  
+}
+
+.admin-card:hover {
+    box-shadow: 0 8px 24px rgba(60, 90, 60, 0.15);
+    transform: translateY(-2px) scale(1.02);
+}
+
+.admin-card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.7rem;
+}

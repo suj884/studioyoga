@@ -25,13 +25,24 @@ public class PasswordResetService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public void createPasswordResetTokenForUser(User user, String token) {
-        PasswordResetToken myToken = new PasswordResetToken();
+   public void createPasswordResetTokenForUser(User user, String token) {
+    Optional<PasswordResetToken> existingTokenOpt = tokenRepository.findByUser(user);
+    PasswordResetToken myToken;
+    if (existingTokenOpt.isPresent()) {
+        // Actualiza el token y la fecha de expiración
+        myToken = existingTokenOpt.get();
+        myToken.setToken(token);
+        myToken.setExpiryDate(LocalDateTime.now().plusHours(1));
+    } else {
+        // Crea uno nuevo
+        myToken = new PasswordResetToken();
         myToken.setToken(token);
         myToken.setUser(user);
         myToken.setExpiryDate(LocalDateTime.now().plusHours(1));
-        tokenRepository.save(myToken);
     }
+    tokenRepository.save(myToken);
+}
+
 
     public void sendResetEmail(User user, String token, String appUrl) {
         String url = appUrl + "/reset-password?token=" + token;
@@ -49,11 +60,10 @@ public class PasswordResetService {
 
     public void updatePassword(String token, String newPassword) {
         PasswordResetToken resetToken = tokenRepository.findByToken(token)
-            .orElseThrow(() -> new IllegalArgumentException("Token inválido"));
+                .orElseThrow(() -> new IllegalArgumentException("Token inválido"));
         User user = resetToken.getUser();
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
         tokenRepository.delete(resetToken);
     }
 }
-

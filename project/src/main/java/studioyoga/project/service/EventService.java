@@ -1,6 +1,7 @@
 package studioyoga.project.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,8 @@ import studioyoga.project.repository.EventRepository;
 
 /**
  * Servicio para la gestión de eventos.
- * Proporciona métodos para listar, buscar, crear, editar, eliminar y activar/desactivar eventos.
+ * Proporciona métodos para listar, buscar, crear, editar, eliminar y
+ * activar/desactivar eventos.
  */
 @Service
 public class EventService {
@@ -42,8 +44,8 @@ public class EventService {
      * @param id ID del evento.
      * @return El evento si existe, o null si no se encuentra.
      */
-    public Event findById(Integer id) {
-        return eventRepository.findById(id).orElse(null);
+    public Optional<Event> findById(Integer id) {
+        return eventRepository.findById(id);
     }
 
     /**
@@ -71,11 +73,10 @@ public class EventService {
      * @param id ID del evento a modificar.
      */
     public void toggleActive(Integer id) {
-        Event event = findById(id);
-        if (event != null) {
+        findById(id).ifPresent(event -> {
             event.setActive(!event.isActive());
             save(event);
-        }
+        });
     }
 
 }

@@ -45,7 +45,7 @@ public class SecurityConfig {
                 .requestMatchers(
                         "/css/**", "/js/**", "/img/**", "/font/**",
                         "/", "/classes", "/landing", "/schedule", "/prices", "/rules", "/events", "/blog", "/guide",
-                        "/login", "/faq", "/location", "/formRegister")
+                        "/login", "/faq", "/location", "/forgotPassword", "/resetPassword")
                 .permitAll()
                 // Solo pides login para reservar o ver reservas
                 .requestMatchers("/classes/reserve/**", "/classes/myReservations", "/classes/cancelReservation/**")

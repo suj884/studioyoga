@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/custom.css}">
 </head>
-<body>
+<body class="d-flex flex-column">
     <div class="container mt-5 py-5">
         <div th:replace="~{fragments/confirmDelete :: confirmDelete(${message}, ${action}, ${cancelUrl})}"></div>
     </div>

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import studioyoga.project.model.User;
+import studioyoga.project.repository.TicketRepository;
 import studioyoga.project.repository.UserRepository;
 
 /**
@@ -27,6 +28,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private TicketRepository ticketRepository;
 
     /**
      * Constructor que inyecta el repositorio de usuarios.
@@ -89,7 +93,8 @@ public class UserService {
      */
     public void save(User user) {
         if (user.getId() == null || (user.getPassword() != null && !user.getPassword().isEmpty())) {
-            // Solo encripta si la contraseña NO está ya encriptada (BCrypt empieza por $2a$ o $2b$)
+            // Solo encripta si la contraseña NO está ya encriptada (BCrypt empieza por $2a$
+            // o $2b$)
             String password = user.getPassword();
             if (password != null && !password.startsWith("$2a$") && !password.startsWith("$2b$")) {
                 user.setPassword(passwordEncoder.encode(password));
@@ -106,7 +111,7 @@ public class UserService {
     /**
      * Actualiza la contraseña de un usuario identificado por su email.
      *
-     * @param email Email del usuario.
+     * @param email       Email del usuario.
      * @param newPassword Nueva contraseña a establecer.
      */
     public void updatePassword(String email, String newPassword) {
@@ -134,15 +139,15 @@ public class UserService {
         if (hasName && hasRole) {
             // Buscar por nombre/apellidos y luego filtrar por rol
             users = userRepository
-                .findByFirstLastNameContainingIgnoreCaseOrSecondLastNameContainingIgnoreCaseOrNameContainingIgnoreCase(
-                    name, name, name)
-                .stream()
-                .filter(u -> u.getRol() != null && finalRole.equalsIgnoreCase(u.getRol().getName()))
-                .collect(Collectors.toList());
+                    .findByFirstLastNameContainingIgnoreCaseOrSecondLastNameContainingIgnoreCaseOrNameContainingIgnoreCase(
+                            name, name, name)
+                    .stream()
+                    .filter(u -> u.getRol() != null && finalRole.equalsIgnoreCase(u.getRol().getName()))
+                    .collect(Collectors.toList());
         } else if (hasName) {
             users = userRepository
-                .findByFirstLastNameContainingIgnoreCaseOrSecondLastNameContainingIgnoreCaseOrNameContainingIgnoreCase(
-                    name, name, name);
+                    .findByFirstLastNameContainingIgnoreCaseOrSecondLastNameContainingIgnoreCaseOrNameContainingIgnoreCase(
+                            name, name, name);
         } else if (hasRole) {
             users = userRepository.findByRol_Name(role);
         } else {
@@ -151,22 +156,24 @@ public class UserService {
 
         // Ordenar por apellidos y nombre
         users.sort(Comparator
-            .comparing(User::getFirstLastName, String.CASE_INSENSITIVE_ORDER)
-            .thenComparing(User::getSecondLastName, String.CASE_INSENSITIVE_ORDER)
-            .thenComparing(User::getName, String.CASE_INSENSITIVE_ORDER)
-        );
+                .comparing(User::getFirstLastName, String.CASE_INSENSITIVE_ORDER)
+                .thenComparing(User::getSecondLastName, String.CASE_INSENSITIVE_ORDER)
+                .thenComparing(User::getName, String.CASE_INSENSITIVE_ORDER));
 
         return users;
     }
 
     /**
-     * Elimina un usuario y todas sus reservas asociadas (operación transaccional).
+     * Elimina un usuario y todas sus reservas y tickets asociados (operación
+     * transaccional).
      *
      * @param userId ID del usuario a eliminar.
      */
+
     @Transactional
     public void deleteUserAndReservations(Integer userId) {
-        reservationService.deleteByUserId(userId); // Elimina todas las reservas del usuario
-        userRepository.deleteById(userId);         // Ahora puedes borrar el usuario
+        ticketRepository.deleteByUsuario_Id(userId); // Elimina tickets asociados
+        reservationService.deleteByUserId(userId); // Elimina reservas asociadas
+        userRepository.deleteById(userId); // Elimina el usuario
     }
 }

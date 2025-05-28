@@ -20,7 +20,8 @@ import studioyoga.project.service.ClassesService;
 
 /**
  * Controlador para la gestión de clases en el panel de administración.
- * Permite listar, crear, editar y eliminar clases, así como validar horarios y evitar duplicados.
+ * Permite listar, crear, editar y eliminar clases, así como validar horarios y
+ * evitar duplicados.
  */
 @Controller
 @RequestMapping("/admin/classes")
@@ -55,11 +56,13 @@ public class ClassController {
     }
 
     /**
-     * Guarda una nueva clase o actualiza una existente, validando que no haya conflictos de horario ni duplicados.
+     * Guarda una nueva clase o actualiza una existente, validando que no haya
+     * conflictos de horario ni duplicados.
      *
-     * @param classes Objeto Classes a guardar.
+     * @param classes            Objeto Classes a guardar.
      * @param redirectAttributes Atributos para mensajes flash en la redirección.
-     * @return Redirección a la vista de administración de clases o al formulario en caso de error.
+     * @return Redirección a la vista de administración de clases o al formulario en
+     *         caso de error.
      */
     @PostMapping("/save")
     public String saveClass(@ModelAttribute("classes") Classes classes, RedirectAttributes redirectAttributes) {
@@ -92,7 +95,7 @@ public class ClassController {
     /**
      * Muestra el formulario de edición para una clase existente.
      *
-     * @param id ID de la clase a editar.
+     * @param id    ID de la clase a editar.
      * @param model Modelo para pasar datos a la vista.
      * @return Vista del formulario de edición de clase.
      */
@@ -103,18 +106,32 @@ public class ClassController {
         return "admin/formClasses";
     }
 
-    /**
-     * Elimina una clase y todas las reservas asociadas a ella.
-     *
-     * @param id ID de la clase a eliminar.
-     * @param redirectAttributes Atributos para mensajes flash en la redirección.
-     * @return Redirección a la vista de administración de clases.
-     */
-    @GetMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String deleteClass(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         classesService.deleteClassAndReservations(id);
         redirectAttributes.addFlashAttribute("success", "Clase eliminada correctamente y todas las reservas asociadas");
         return "redirect:/admin/classes/manageclasses";
+    }
+
+    @GetMapping("/confirm-delete/{id}")
+    public String confirmDelete(@PathVariable Integer id, Model model) {
+        Classes clase = classesService.findById(id)
+                .orElseThrow(() -> new RuntimeException("Clase no encontrada"));
+
+        // Si quieres mostrar el número de reservas asociadas:
+        int numReservas = classesService.countReservationsForClass(id); // Implementa este método abajo
+
+        String mensaje = "¿Seguro que quieres eliminar la clase: '" + clase.getTitle() + "'?";
+        if (numReservas > 0) {
+            mensaje += " Esta acción eliminará también las " + numReservas + " reservas asociadas.";
+        } else {
+            mensaje += " Esta acción eliminará todas las reservas asociadas (si existen).";
+        }
+
+        model.addAttribute("message", mensaje);
+        model.addAttribute("action", "/admin/classes/delete/" + id);
+        model.addAttribute("cancelUrl", "/admin/classes/manageclasses");
+        return "admin/confirm-delete";
     }
 
 }

@@ -1,15 +1,20 @@
 package studioyoga.project.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import studioyoga.project.model.Event;
 import studioyoga.project.service.EventService;
 
 /**
  * Controlador para la gestión de eventos en el panel de administración.
- * Permite listar, crear, editar, guardar, eliminar y activar/desactivar eventos.
+ * Permite listar, crear, editar, guardar, eliminar y activar/desactivar
+ * eventos.
  */
 @Controller
 @RequestMapping("/admin/events")
@@ -54,18 +59,17 @@ public class EventsController {
         return "redirect:/admin/events/manageevents";
     }
 
-    /**
-     * Muestra el formulario de edición para un evento existente.
-     *
-     * @param id ID del evento a editar.
-     * @param model Modelo para pasar datos a la vista.
-     * @return Vista del formulario de edición de evento.
-     */
-    @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable Integer id, Model model) {
-        model.addAttribute("event", eventService.findById(id));
-        return "admin/formEvents";
+@GetMapping("/edit/{id}")
+public String showEditForm(@PathVariable Integer id, Model model, RedirectAttributes redirectAttributes) {
+    Optional<Event> eventOpt = eventService.findById(id);
+    if (!eventOpt.isPresent()) {
+        redirectAttributes.addFlashAttribute("error", "Evento no encontrado");
+        return "redirect:/admin/events/manageevents";
     }
+    model.addAttribute("event", eventOpt.get());
+    return "admin/formEvents";
+}
+
 
     /**
      * Elimina un evento por su ID.
@@ -90,4 +94,23 @@ public class EventsController {
         eventService.toggleActive(id);
         return "redirect:/admin/events/manageevents";
     }
+
+    @GetMapping("/confirm-delete/{id}")
+    public String confirmDelete(@PathVariable Integer id, Model model) {
+        Event event = eventService.findById(id)
+                .orElseThrow(() -> new RuntimeException("Evento no encontrado"));
+        model.addAttribute("message", "¿Seguro que quieres eliminar el evento: '" + event.getTitle() + "'?");
+        model.addAttribute("action", "/admin/events/delete/" + id);
+        model.addAttribute("cancelUrl", "/admin/events/manageevents");
+        return "admin/confirm-delete";
+    }
+
+    // Eliminar el evento (POST)
+    @PostMapping("/delete/{id}")
+    public String deleteEvent(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        eventService.deleteById(id);
+        redirectAttributes.addFlashAttribute("success", "Evento eliminado correctamente.");
+        return "redirect:/admin/events/manageevents";
+    }
+
 }

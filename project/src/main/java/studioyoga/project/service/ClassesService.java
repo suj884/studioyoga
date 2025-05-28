@@ -161,5 +161,8 @@ public class ClassesService {
     public boolean existsByDateTimeExcludingId(LocalDate eventDate, LocalTime timeInit, Integer id) {
         return classRepository.countByEventDateAndTimeInitAndIdNot(eventDate, timeInit, id) > 0;
     }
+public int countReservationsForClass(Integer classId) {
+    return reservationRepository.countByClassesId(classId);
+}
 
 }
