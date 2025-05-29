@@ -23,6 +23,8 @@ public class RedirConstants {
 	    public static final String REDIRECT_ADMIN_USERS_EDIT = "redirect:/admin/users/edit";
 	    public static final String REDIRECT_ADMIN_USERS_DELETE = "redirect:/admin/users/delete";
 	    public static final String REDIRECT_ADMIN_USERS_LIST = "redirect:/admin/users/list";
+	    public static final String REDIRECT_ADMIN_BLOG = "redirect:/admin/blog/manageblog";
+		public static final String REDIRECT_ADMIN_EVENTS = "redirect:/admin/events/manageevents";
 
 	    public static final String PATH_TO_INDEX = "/index";   
 	    public static final String PAGE_INDEX = "user/index";

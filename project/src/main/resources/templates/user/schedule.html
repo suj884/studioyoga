@@ -12,12 +12,12 @@
   <link rel="stylesheet" th:href="@{/css/schedule.css}">
 </head>
 
-<body>
+<body class="d-flex flex-column">
   <!-- Incluye el navbar-fragment -->
   <header th:replace="~{fragments/navbar :: navbar}"></header>
   <main class="flex-fill">
     <div class="container py-5 mt-5">
-      <h1 class="text-center mb-4">Horario semanal de clases</h1>
+      <h2 class="text-center">Horario semanal de clases</h2>
       <!-- Tabla tradicional para escritorio/tablet -->
       <div class="table-responsive d-none d-md-block">
         <table class="table table-bordered align-middle text-center">

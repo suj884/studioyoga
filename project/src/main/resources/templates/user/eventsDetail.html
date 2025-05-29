@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del evento</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.6/dist/minty/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
+</head>
+
+<body>
+    <header th:replace="~{fragments/navbar :: navbar}"></header>
+    <main class="flex-fill">
+        <div class="container py-5 mt-5">
+            <div class="card mx-auto" style="max-width: 600px;">
+                <img th:if="${event.imageUrl != null}" th:src="${event.imageUrl}" class="card-img-top"
+                    alt="Imagen del evento">
+                <div class="card-body">
+                    <h2 class="card-title" th:text="${event.title}">Título del evento</h2>
+                    <p>
+                        <strong>Fecha:</strong>
+                        <span th:text="${#temporals.format(event.eventDate, 'dd/MM/yyyy')}"></span><br>
+                        <strong>Lugar:</strong>
+                        <span th:text="${event.location}"></span>
+                    </p>
+                    <p th:text="${event.description}">Descripción del evento</p>
+                    <a th:href="@{/events}" class="btn btn-outline-success back-link">
+                    <i class="bi bi-arrow-left"></i> Volver a eventos
+                </a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+
+</html>

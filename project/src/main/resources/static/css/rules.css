@@ -1,0 +1,13 @@
+.section-divider {
+  height: 2px;
+  background: linear-gradient(90deg, #b2dfdb 0%, #fff 100%);
+  border: none;
+  margin: 2.5rem 0 2rem 0;
+}
+h3.section-subtitle {
+  margin-top: 1.5rem;
+  color: #26a69a;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}

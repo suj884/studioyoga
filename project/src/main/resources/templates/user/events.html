@@ -36,7 +36,11 @@
                                 <strong>Lugar:</strong>
                                 <span th:text="${event.location}">Lugar</span>
                             </p>
-                            <p class="card-text" th:text="${event.description}">Descripción del evento</p>
+                            <a th:href="@{/event-detail/{id}(id=${event.id})}"
+                                class="btn btn-outline-success btn-sm">
+                                Leer más
+                            </a>
+                            <!-- <p class="card-text" th:text="${event.description}">Descripción del evento</p> -->
                         </div>
                     </div>
                 </div>

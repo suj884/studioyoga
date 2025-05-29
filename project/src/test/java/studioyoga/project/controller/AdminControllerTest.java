@@ -15,7 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(AdminController.class)
 @org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc(addFilters = false)
-public class AdminControllerTest {
+class AdminControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -24,9 +24,6 @@ public class AdminControllerTest {
     @MockBean
     private RolService rolService;
 
-    // Mockea los servicios que use tu AdminController, por ejemplo:
-    // @MockBean
-    // private AlgúnServicio servicio;
 
     @Test
     void testAdminDashboard() throws Exception {

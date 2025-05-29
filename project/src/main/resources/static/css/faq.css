@@ -1,0 +1,11 @@
+.section-title {
+  margin: 2.5rem 0 1.2rem 0;
+  font-size: 1.5em;
+  line-height: 1.2;
+}
+
+.faq-question {
+  font-weight: 700;
+  margin-top: 1.5rem;
+  line-height: 1.3;
+}

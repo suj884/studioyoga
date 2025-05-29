@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import studioyoga.project.constants.RedirConstants;
 import studioyoga.project.model.BlogPost;
 import studioyoga.project.service.BlogService;
 
@@ -70,7 +71,7 @@ public class BlogPostController {
             return "admin/blogForm";
         } else {
             redirectAttributes.addFlashAttribute("error", "No se ha encontrado el post solicitado.");
-            return "redirect:/admin/blog/manageblog";
+            return RedirConstants.REDIRECT_ADMIN_BLOG;
         }
     }
 
@@ -85,23 +86,9 @@ public class BlogPostController {
     public String savePost(@ModelAttribute BlogPost post, RedirectAttributes redirectAttributes) {
         blogService.save(post);
         redirectAttributes.addFlashAttribute("success", "Entrada de blog guardada correctamente.");
-        return "redirect:/admin/blog/manageblog";
+        return RedirConstants.REDIRECT_ADMIN_BLOG;
     }
-
-    /**
-     * Elimina una publicación del blog.
-     *
-     * @param id ID de la publicación a eliminar.
-     * @param redirectAttributes Atributos para mensajes flash en la redirección.
-     * @return Redirección a la vista de administración de publicaciones.
-     */
-    @PostMapping("/delete/{id}")
-    public String deletePost(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
-        blogService.deleteById(id);
-        redirectAttributes.addFlashAttribute("success", "Entrada de blog eliminada correctamente.");
-        return "redirect:/admin/blog/manageblog";
-    }
-
+    
     /**
      * Muestra una página de confirmación antes de eliminar una publicación.
      *
@@ -121,5 +108,18 @@ public class BlogPostController {
         model.addAttribute("cancelUrl", "/admin/blog/manageblog");
         return "admin/confirm-delete";
     }
-
+    
+    /**
+     * Elimina una publicación del blog.
+     *
+     * @param id ID de la publicación a eliminar.
+     * @param redirectAttributes Atributos para mensajes flash en la redirección.
+     * @return Redirección a la vista de administración de publicaciones.
+     */
+    @PostMapping("/delete/{id}")
+    public String deletePost(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        blogService.deleteById(id);
+        redirectAttributes.addFlashAttribute("success", "Entrada de blog eliminada correctamente.");
+        return "redirect:/admin/blog/manageblog";
+    }
 }

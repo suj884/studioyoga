@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import studioyoga.project.constants.RedirConstants;
 import studioyoga.project.model.Event;
 import studioyoga.project.service.EventService;
 
@@ -54,9 +55,10 @@ public class EventsController {
      * @return Redirección a la vista de administración de eventos.
      */
     @PostMapping("/save")
-    public String saveEvent(@ModelAttribute Event event) {
+    public String saveEvent(@ModelAttribute Event event, RedirectAttributes redirectAttributes) {
         eventService.save(event);
-        return "redirect:/admin/events/manageevents";
+        redirectAttributes.addFlashAttribute("success", "Evento guardado correctamente.");
+        return RedirConstants.REDIRECT_ADMIN_EVENTS;
     }
 
 @GetMapping("/edit/{id}")
@@ -64,7 +66,7 @@ public String showEditForm(@PathVariable Integer id, Model model, RedirectAttrib
     Optional<Event> eventOpt = eventService.findById(id);
     if (!eventOpt.isPresent()) {
         redirectAttributes.addFlashAttribute("error", "Evento no encontrado");
-        return "redirect:/admin/events/manageevents";
+        return RedirConstants.REDIRECT_ADMIN_EVENTS;
     }
     model.addAttribute("event", eventOpt.get());
     return "admin/formEvents";

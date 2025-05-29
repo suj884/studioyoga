@@ -1,0 +1,117 @@
+/* hero */
+.hero-yoga {
+  width: 100vw;
+  min-height: 100vh;
+  /* Ocupa toda la altura de la ventana */
+  background: url('https://res.cloudinary.com/dr5e7n5yp/image/upload/v1748450931/hero_h2xni1.jpg') center/cover no-repeat;
+  background-size: cover;
+  /* La imagen cubre todo el área, sin distorsión */
+  color: #fff;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+}
+
+.hero-yoga::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* background: rgba(20, 40, 40, 0.45); */
+}
+
+.hero-yoga .container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-yoga h1,
+.hero-yoga p {
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.hero-content a.btn {
+  margin-top: 25rem;
+  /* aumenta este valor para más separación */
+}
+
+.rounded-4 {
+  border-radius: 1.5rem !important;
+}
+
+.shadow-sm {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.07) !important;
+}
+
+.btn-outline-success.rounded-pill {
+  border-width: 2px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+
+.card-title {
+  font-weight: 600;
+}
+/* carrousel */
+.carousel-img-fix {
+  width: 100%;
+  max-height: 45rem;      /* Altura máxima en escritorio */
+  height: 50vw;           /* Altura relativa al ancho de pantalla */
+  object-fit: cover;
+  object-position: center;
+  background: #eee;
+  transition: max-height 0.3s;
+}
+
+
+
+
+/* testimonios */
+.testimonial {
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #444;
+  background: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+  padding: 2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.testimonial .author {
+  font-size: 0.95rem;
+  color: #999;
+  margin-top: 1.2rem;
+  text-align: right;
+}
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .hero-yoga {
+    min-height: 50vh;
+  }
+
+  .hero-yoga h1 {
+    font-size: 2.2rem;
+  }
+}
+@media (max-width: 768px) {
+  .carousel-img-fix {
+    height: 45vw;         /* Un poco más alto en móviles */
+    max-height: 250px;    /* Limita la altura máxima */
+  }
+}
+@media (max-width: 480px) {
+  .carousel-img-fix {
+    height: 55vw;
+    max-height: 180px;
+  }
+}
+

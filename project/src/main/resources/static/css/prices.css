@@ -1,0 +1,29 @@
+.price-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  margin-bottom: 2rem;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.price-title {
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.price-value {
+  font-size: 2.2em;
+  color: #609B8A;
+  font-weight: bold;
+}
+
+.badge-yoga {
+  background: #f9f1e7;
+  color: #b77c3a;
+  font-weight: 600;
+}
+
+@media (max-width: 767.98px) {
+  .price-card {
+    margin-bottom: 1.5rem;
+  }
+}
